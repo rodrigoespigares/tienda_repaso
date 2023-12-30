@@ -1,0 +1,22 @@
+.principal{
+    justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.product{
+    width: 20%;
+    padding: .5rem;
+    border: .2rem solid var(--secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1rem;
+}
+.product__img{
+    width: 90%;
+}
+.product__img img{
+    width: 100%;
+    border-radius: .3rem;
+}

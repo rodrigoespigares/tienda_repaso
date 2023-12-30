@@ -1,0 +1,29 @@
+header{
+    display: grid;
+    grid-template-areas: 'logo out'
+                         'menu admin';
+    padding: 0 2rem;
+}
+#user{
+    grid-area: out;
+    display: flex;
+    justify-self: end;
+    justify-content: space-around;
+    width: 20%;
+}
+#admin{
+    grid-area: admin;
+    display: flex;
+    justify-self: end;
+    justify-content: space-around;
+    width: 60%;
+}
+header a{
+    text-decoration: none;
+    color: var(--primary);
+}
+nav a{
+    border: .1rem solid var(--secondary);
+    padding: .1rem 2rem;
+    background-color: var(--secondary--ceroSeis);
+}

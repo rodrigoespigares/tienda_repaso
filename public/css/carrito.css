@@ -1,0 +1,25 @@
+.carrito{
+    width: 80%;
+}
+.carrito__producto{
+    display: flex;
+    justify-content: space-between;
+    border: .1rem solid var(--secondary);
+    padding: .7rem;
+}
+.carrito__producto__info{
+    display: flex;
+    align-items: center;
+}
+.carrito__producto__content{
+    width: 5%;
+}
+.carrito__producto__content__img{
+    width: 100%;
+}
+.carrito__producto__cantidad{
+    display: flex;
+    align-items: center;
+    width: 10rem;
+    justify-content: space-around;
+}
