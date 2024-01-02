@@ -25,6 +25,8 @@
             if(isset($_POST['borrar'])){
                 $this->categoriasService->borrar($_POST['borrar']);
                 $this->gestionCategorias();
+            }elseif (isset($_POST['editar'])){
+                
             }
         }
         public function gestionProductos() : void {

@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'rodri/repaso_tienda',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'name' => 'rodrigo/tienda_repaso',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '0adfb8107ceed61304369e126feaa869ad7b2b41',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -37,10 +37,10 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'rodri/repaso_tienda' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+        'rodrigo/tienda_repaso' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '0adfb8107ceed61304369e126feaa869ad7b2b41',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
