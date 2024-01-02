@@ -9,9 +9,9 @@
             <td><?=$key?></td>
             <td><?=$producto->getNombre()?></td>
             <td>
-                <form action="<?=BASE_URL?>Admin/opcionesProducto">
-                    <button>Borrar</button>
-                    <button>Editar</button>
+                <form action="<?=BASE_URL?>Admin/opcionesProducto" method="POST">
+                    <button name="borrar" value="<?=$producto->getId()?>">Borrar</button>
+                    <button name="editar" value="<?=$producto->getId()?>">Editar</button>
                 </form>
             </td>
         </tr>

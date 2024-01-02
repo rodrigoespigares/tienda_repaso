@@ -26,7 +26,7 @@
                 $this->categoriasService->borrar($_POST['borrar']);
                 $this->gestionCategorias();
             }elseif (isset($_POST['editar'])){
-                
+                echo "SIN HACER";
             }
         }
         public function gestionProductos() : void {
@@ -57,5 +57,13 @@
             }
             $this->productosService->addProduct($_POST['data']);
             $this->gestionProductos();
+        }
+        public function opcionesProducto() : void {
+            if(isset($_POST['borrar'])){
+                $this->productosService->borrar($_POST['borrar']);
+                $this->gestionProductos();
+            }elseif (isset($_POST['editar'])){
+                
+            }
         }
     }

@@ -22,4 +22,7 @@
         public function nuevoPedido($datos){
             return $this->repository->nuevoPedido($datos);
         }
+        public function borrar($id) :void {
+            $this->repository->borrar($id);
+        }
     }
