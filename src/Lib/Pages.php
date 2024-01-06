@@ -22,11 +22,11 @@ class Pages
             }
         }
         // Carga de la cabecera
-        require_once "views/layout/header.php";
+        require_once "Views/layout/header.php";
         // Carga el cuerpo de la vista
-        require_once "views/$pageName.php";
+        require_once "Views/$pageName.php";
         // Carga del footer
-        require_once "views/layout/footer.php";
+        require_once "Views/layout/footer.php";
     }
     public function converter(array $params):void
     {

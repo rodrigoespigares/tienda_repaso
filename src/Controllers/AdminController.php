@@ -41,7 +41,7 @@
                 $nombreFichero = $_FILES['imagen']['name'];
                 $nombreCompleto = $nombreDirectorio.$nombreFichero;
                 if(!is_dir('subidas')){
-                    mkdir('subidas',0755);
+                    mkdir('subidas',0755,true);
                 }
                 if(is_file($nombreCompleto)){
                     $idUnico=time();
