@@ -17,7 +17,7 @@
         </tr>
     <?php endforeach;?>
 </table>
-<form action="<?=BASE_URL?>Admin/addProduct" method="post" enctype="multipart/form-data">
+<form action="<?=BASE_URL?>addP" method="post" enctype="multipart/form-data">
     <div>
         <label for="categoria_id">Categoria id</label>
         <select name="data[categoria_id]" id="categoria_id">

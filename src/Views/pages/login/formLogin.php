@@ -1,6 +1,6 @@
 <?php if ((isset($_POST['login']) && !isset($_SESSION['identity'])) || isset($error)) : ?>
     <h2>Login</h2>
-    <form action="<?= BASE_URL ?>Login/vLogin" method="post" class="formLogin">
+    <form action="<?= BASE_URL ?>vlogin" method="post" class="formLogin">
         <input type="text" name="isLogin" value="true" hidden>
         <div>
             <label for="email">Email</label>
@@ -17,7 +17,7 @@
     </form>
 <?php elseif (!isset($_POST['login']) || isset($_POST['register'])) : ?>
     <h2>Register</h2>
-    <form action="<?= BASE_URL ?>Login/vLogin" method="post" class="formLogin">
+    <form action="<?= BASE_URL ?>vlogin" method="post" class="formLogin">
         <input type="text" name="isLogin" value="false" hidden>
         <div>
             <label for="email">Email</label>

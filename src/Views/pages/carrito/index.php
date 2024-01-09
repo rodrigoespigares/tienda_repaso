@@ -9,9 +9,9 @@
                 <p><?= $productoCarrito['productos'][0]->getNombre()?></p>
             </div>
             <div class="carrito__producto__cantidad">
-                <a href="<?=BASE_URL?>Carrito/down&id=<?=$productoCarrito['id']?>">-</a>
+                <a href="<?=BASE_URL?>down?id=<?=$productoCarrito['id']?>">-</a>
                 <p><?= $productoCarrito["unidades"]?></p>
-                <a href="<?=BASE_URL?>Carrito/add&id=<?=$productoCarrito['id']?>">+</a>
+                <a href="<?=BASE_URL?>add?id=<?=$productoCarrito['id']?>">+</a>
             </div>
             <div class="carrito__producto__delete">
                 <a href="">Borrar</a>

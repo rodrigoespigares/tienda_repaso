@@ -7,7 +7,7 @@
             <h3><?=$value->getNombre()?></h3>
             <p><?=$value->getDescripcion()?></p>
             <p><?=$value->getPrecio()?>€</p>
-            <a href="<?=BASE_URL?>Carrito/push&id=<?=$value->getId()?>">Comprar</a>
+            <a href="<?=BASE_URL?>push?id=<?=$value->getId()?>">Comprar</a>
         </div>
     <?php endforeach?>
 </section>

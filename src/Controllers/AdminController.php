@@ -40,8 +40,9 @@
                 $nombreDirectorio = "subidas/";
                 $nombreFichero = $_FILES['imagen']['name'];
                 $nombreCompleto = $nombreDirectorio.$nombreFichero;
-                if(!is_dir('subidas')){
-                    mkdir('subidas',0755,true);
+                if (!is_dir($nombreDirectorio)) {
+                    mkdir($nombreDirectorio, 0755, true);
+                    chown($nombreDirectorio, 'www-data');
                 }
                 if(is_file($nombreCompleto)){
                     $idUnico=time();

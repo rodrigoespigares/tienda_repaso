@@ -17,7 +17,7 @@
         </tr>
     <?php endforeach;?>
 </table>
-<form action="<?=BASE_URL?>Admin/addCategory" method="post">
+<form action="<?=BASE_URL?>addC" method="post">
     <label for="name">Nombre nueva categoria:</label>
     <input type="text" name="nombre" id="name">
     <button type="submit">Guardar</button>

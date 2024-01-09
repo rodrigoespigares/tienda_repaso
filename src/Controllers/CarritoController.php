@@ -6,14 +6,10 @@
     use Services\LineasPedidosService;
     class CarritoController{
         private ProductosService $service;
-        private PedidosService $pedidoService;
-        private LineasPedidosService $lineasPedidosService;
         private Pages $pages;
         public function __construct()
         {
             $this->service = new ProductosService();
-            $this->pedidoService = new PedidosService();
-            $this->lineasPedidosService = new LineasPedidosService();
             $this->pages = new Pages();   
         }
         public function index():void {
@@ -27,12 +23,16 @@
         public function down():void {
             if(isset($_GET['id'])){
                 $id = $_GET['id'];
-                $_SESSION['carrito'][$id]['unidades']--;
-                if($_SESSION['carrito'][$id]['unidades']==0){
-                    unset($_SESSION['carrito'][$id]);
+                foreach ($_SESSION['carrito'] as $key => $value) {
+                    if($value['id']==$id){
+                        $_SESSION['carrito'][$key]["unidades"]--;
+                        if ($_SESSION['carrito'][$key]["unidades"]==0) {
+                            unset($_SESSION['carrito'][$key]);
+                        }
+                    }
+                    header("Location:".BASE_URL."carrito");
                 }
             }
-            header("Location:".BASE_URL."Carrito/index");
         }
         public function push() {
             $id = intval($_GET["id"]);
@@ -52,7 +52,7 @@
                         $_SESSION['carrito'][$key]["unidades"]++;
                     }
                 }
-                header("Location:".BASE_URL."Carrito/index");
+                header("Location:".BASE_URL."carrito");
             }
         }
         public function pedido(){
