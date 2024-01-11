@@ -59,14 +59,18 @@
             Router::add('GET', '/down?id=:id', function ($id) {
                 return (new CarritoController())->down($id);
             });
-            
 
-            Router::add('GET', '/contacto/:id', function ($id) {
-                return (new ContactoController())->showContact($id);
+            //PEDIDO
+            Router::add('POST','/pedido', function (){
+                return (new CarritoController())->pedido();
             });
-            Router::add('GET', '/?page=:id', function ($id) {
-                return (new ContactoController())->showAll($id);
+            Router::add('POST','/pedir', function (){
+                return (new CarritoController())->pedir();
             });
+            Router::add('GET','/mis_pedidos', function (){
+                return (new CarritoController())->showPedidos();
+            });
+            
 
             // ERROR 404
             Router::add('GET', '/error', function ($id) {

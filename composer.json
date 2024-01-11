@@ -3,7 +3,14 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "Rodrigo\\TiendaRepaso\\": "src/",
+            "Controllers\\":"./src/Controllers/",
+            "Lib\\":"./src/Lib/",
+            "Models\\":"./src/Models/",
+            "Repositories\\":"./src/Repositories/",
+            "Routes\\":"./src/Routes/",
+            "Services\\":"./src/Services/",
+            "Views\\":"./src/Views/"
         }
     },
     "authors": [

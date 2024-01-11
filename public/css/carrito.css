@@ -6,6 +6,7 @@
     justify-content: space-between;
     border: .1rem solid var(--secondary);
     padding: .7rem;
+    margin-bottom: 2rem;
 }
 .carrito__producto__info{
     display: flex;
@@ -22,4 +23,10 @@
     align-items: center;
     width: 10rem;
     justify-content: space-around;
+}
+.carrito__producto div{
+    display: flex;
+}
+.carrito__producto div p{
+    margin-right: .7rem;
 }

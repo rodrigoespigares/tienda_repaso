@@ -60,6 +60,14 @@ class Pedidos{
     public function setDireccion(string $direccion): void {
         $this->direccion = $direccion;
     }
+    // Getter y Setter para $hora
+    public function getCoste(): string {
+        return $this->coste;
+    }
+
+    public function setCoste(string $coste): void {
+        $this->coste = $coste;
+    }
 
     // Getter y Setter para $estado
     public function getEstado(): string {

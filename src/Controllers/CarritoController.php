@@ -1,14 +1,17 @@
 <?php
     namespace Controllers;
     use Lib\Pages;
-    use Services\ProductosService;
+use Models\Pedidos;
+use Services\ProductosService;
     use Services\PedidosService;
     use Services\LineasPedidosService;
     class CarritoController{
         private ProductosService $service;
         private Pages $pages;
+        private PedidosService $pedidosService;
         public function __construct()
         {
+            $this->pedidosService = new PedidosService();
             $this->service = new ProductosService();
             $this->pages = new Pages();   
         }
@@ -68,5 +71,10 @@
             $this->service->nuevoPedido($datos);
             $_SESSION['carrito'] = null;
             header("Location:".BASE_URL);
+        }
+        public function showPedidos(){
+            $id = $_SESSION['identity']['id'];
+            $result = $this->pedidosService->findAll($id);
+            $this->pages->render("pages/carrito/misPedidos",["pedidos"=>$result]);
         }
     }

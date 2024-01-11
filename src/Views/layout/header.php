@@ -16,17 +16,7 @@ $categoriasAdmin = array(
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Zarando</title>
-        
-
         <link rel="stylesheet" href="<?=BASE_URL?>public/css/style.css">
-        <link rel="stylesheet" href="<?=BASE_URL?>public/css/header.css">
-        <link rel="stylesheet" href="<?=BASE_URL?>public/css/product.css">
-        <link rel="stylesheet" href="<?=BASE_URL?>public/css/carrito.css">        
-        <link rel="stylesheet" href="<?=BASE_URL?>vendor/stefangabos/zebra_pagination/public/css/zebra_pagination.css">
-        <link rel="stylesheet" href="<?=BASE_URL?>public/css/login.css">
-        <link rel="stylesheet" href="<?=BASE_URL?>public/css/commit.css">
-        <link rel="stylesheet" href="<?=BASE_URL?>public/css/edit.css">
-        <link rel="stylesheet" href="<?=BASE_URL?>public/css/footer.css">
         <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
     </head>
     <body>
@@ -55,7 +45,7 @@ $categoriasAdmin = array(
                 <?php foreach ($categorias as $key => $categoria): ?>
                     <a href="<?=BASE_URL?>c?id=<?= $categoria->getId()?>"><?= $categoria->getNombre()?></a>
                 <?php endforeach;?>
-                <a href="">Mis pedidos</a>
+                <a href="<?=BASE_URL?>mis_pedidos">Mis pedidos</a>
             </nav>
         <?php endif;?>
         <?php if(isset($_SESSION['identity']) && $_SESSION['identity']['rol']=='admin'):?>

@@ -16,7 +16,7 @@
 </section>
 <section class="pedido">
     <h2>Hacer el pedido</h2>
-    <form action="<?=BASE_URL?>Carrito/pedir" method="post">
+    <form action="<?=BASE_URL?>pedir" method="post">
         <div>
             <label for="provincia">Provincia</label>
             <input type="text" name="data[provincia]" id="provincia">

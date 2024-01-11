@@ -21,7 +21,7 @@
 </section>
 <?php if(count($_SESSION["carrito"]) >0):?>
     <section>
-        <form action="<?=BASE_URL?>Carrito/pedido" method="POST">
+        <form action="<?=BASE_URL?>pedido" method="POST">
             <button type="submit">Realizar pedido</button>
         </form>
     </section>
