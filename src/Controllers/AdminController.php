@@ -3,14 +3,17 @@
     use Lib\Pages;
     use Services\CategoriasService;
     use Services\ProductosService;
+    use Services\PedidosService;
     class AdminController{
         private CategoriasService $categoriasService;
         private ProductosService $productosService;
+        private PedidosService $pedidosService;
         private Pages $pages;
         public function __construct()
         {
             $this->categoriasService = new CategoriasService();
             $this->productosService = new ProductosService();
+            $this->pedidosService = new PedidosService();
             $this->pages = new Pages();
         }
         public function gestionCategorias() : void {
@@ -72,5 +75,13 @@
             }elseif (isset($_POST['editar'])){
                 echo "SIN HACER";
             }
+        }
+        public function showAllPedidos() {
+            $result = $this->pedidosService->findAll();
+            $this->pages->render("pages/admin/gestionPedidos",["pedidos"=>$result]);
+        }
+        public function changeEstado($id){
+            $this->pedidosService->changeEstado($id,$_POST['estado']);
+            header("Location:".BASE_URL."gestionPedidos");
         }
     }

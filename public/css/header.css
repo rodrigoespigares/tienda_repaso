@@ -3,6 +3,8 @@ header{
     grid-template-areas: 'logo out'
                          'menu admin';
     padding: 0 2rem;
+    border-bottom: .1rem solid var(--primary);
+    padding-bottom: .2rem;
 }
 #user{
     grid-area: out;

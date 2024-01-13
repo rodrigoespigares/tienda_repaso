@@ -30,3 +30,28 @@
 .carrito__producto div p{
     margin-right: .7rem;
 }
+.detalle__producto{
+    margin-top: -2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border-bottom: 1px solid var(--secondary);
+    border-left: 1px solid var(--secondary);
+    border-right: 1px solid var(--secondary);
+    margin-bottom: 2rem;
+}
+.detalle__producto--cabecera{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.detalle__producto h2{
+    font-size: 1rem;
+    color: var(--primary);
+}
+.detalle__producto a{
+    color: var(--secondary);
+    text-decoration: none;
+    font-size: 2rem;
+}

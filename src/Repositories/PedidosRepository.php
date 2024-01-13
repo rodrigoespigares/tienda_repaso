@@ -18,8 +18,26 @@ class PedidosRepository
         $this->conection = new DataBase();
         $this->service = new LineasPedidosService();
     }
-    public function findAll($id) :?array
+    public function findAll():? array {
+        $this->conection->querySQL("SELECT * FROM pedidos;");
+        
+        return $this->extractAll();
+    }
+    public function extractAll():?array {
+        $resultado = [];
+        try{
+            $resultadosData = $this->conection->allRegister();
+            foreach ($resultadosData as $resultadoData){
+                $resultado[]=Pedidos::fromArray($resultadoData);
+            }
+        }catch(PDOException){
+            $resultado=null;
+        }
+        return $resultado;
+    }
+    public function find($id) :?array
     {
+        $result = [];
         try {
             $this->sql = $this->conection->prepareSQL("SELECT * FROM pedidos WHERE usuario_id=:usuario_id;");
             $this->sql->bindValue(":usuario_id", $id);
@@ -30,7 +48,7 @@ class PedidosRepository
             }
             $this->sql->closeCursor();
         } catch (PDOException $e) {
-            $result = $e->getMessage();
+            $result = null;
         }
         $this->sql = null;
         return $result;
@@ -64,6 +82,23 @@ class PedidosRepository
             echo $e->getMessage();
         }
         $this->sql->closeCursor();
+        $this->sql = null;
+        return $result;
+    }
+    public function changeEstado($id,$estado){
+        try {
+            $this->sql = $this->conection->prepareSQL("UPDATE pedidos SET estado = :estado WHERE id = :id;");
+            $this->sql->bindValue(":id", $id);
+            $this->sql->bindValue(":estado", $estado);
+            $this->sql->execute();
+            $resultados = $this->sql->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($resultados as $resultadoData){
+                $result[]=Pedidos::fromArray($resultadoData);
+            }
+            $this->sql->closeCursor();
+        } catch (PDOException $e) {
+            $result = null;
+        }
         $this->sql = null;
         return $result;
     }

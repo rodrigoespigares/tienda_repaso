@@ -2,12 +2,14 @@
     <tr>
         <th>id</th>
         <th>nombre</th>
+        <th>stock</th>
         <th>opciones</th>
     </tr>
     <?php foreach ($productos as $key => $producto) : ?>
         <tr>
             <td><?=$key?></td>
             <td><?=$producto->getNombre()?></td>
+            <td><?=$producto->getStock()?></td>
             <td>
                 <form action="<?=BASE_URL?>opcionesProd" method="POST">
                     <?php if($producto->getBorrado()==0):?>
@@ -26,7 +28,9 @@
         <label for="categoria_id">Categoria id</label>
         <select name="data[categoria_id]" id="categoria_id">
             <?php foreach ($categorias as $key => $value) :?>
-                <option value="<?=$value->getId()?>"><?=$value->getNombre()?></option>
+                <?php if($value->getBorrado()==0) :?>
+                    <option value="<?=$value->getId()?>"><?=$value->getNombre()?></option>
+                <?php endif; ?>
             <?php endforeach;?>
         </select>
     </div>

@@ -76,12 +76,12 @@ use Services\ProductosService;
         }
         public function showPedidos(){
             $id = $_SESSION['identity']['id'];
-            $result = $this->pedidosService->findAll($id);
+            $result = $this->pedidosService->find($id);
             $this->pages->render("pages/carrito/misPedidos",["pedidos"=>$result]);
         }
         public function showDetalle(){
             $id = $_SESSION['identity']['id'];
-            $result = $this->pedidosService->findAll($id);
+            $result = $this->pedidosService->find($id);
             $id_pedido = $_POST['detalle'];
             $resultDetalles = $this->lineasService->findAll($id_pedido);
             $this->pages->render("pages/carrito/misPedidos",["pedidos"=>$result,"detalles"=>$resultDetalles]);

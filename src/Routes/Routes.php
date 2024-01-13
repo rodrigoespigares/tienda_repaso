@@ -81,9 +81,16 @@
             Router::add('POST','/detalle_pedido', function (){
                 return (new CarritoController())->showDetalle();
             });
+            // GESTION DE PEDIDOS
+            Router::add('GET','/gestionPedidos', function (){
+                return (new AdminController())->showAllPedidos();
+            });
+            Router::add('POST', '/changeEstado/:id', function ($id) {
+                return (new AdminController())->changeEstado($id);
+            });
 
             // ERROR 404
-            Router::add('GET', '/error', function ($id) {
+            Router::add('GET', '/error', function () {
                 return (new ErrorController())->show_err404();
             });
             Router::dispatch();

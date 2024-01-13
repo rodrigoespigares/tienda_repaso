@@ -1,6 +1,6 @@
 <section class="principal">
     <?php foreach ($productos as $key => $value) :?>
-        <?php if($value->getBorrado() == 0):?>
+        <?php if($value->getBorrado() == 0 && $value->getStock() >0):?>
             <div class="product">
                 <div class="product__img">
                     <img src="<?=BASE_URL."/subidas/".$value->getImagen()?>" alt="Producto">
