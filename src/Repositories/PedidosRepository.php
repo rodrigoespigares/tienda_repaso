@@ -35,19 +35,6 @@ class PedidosRepository
         $this->sql = null;
         return $result;
     }
-    public function extractAll(): ?array
-    {
-        $categorias = [];
-        try {
-            $categoriasData = $this->conection->allRegister();
-            foreach ($categoriasData as $categoriaData) {
-                $categorias[] = Pedidos::fromArray($categoriaData);
-            }
-        } catch (PDOException $e) {
-            $categorias = $e->getMessage();
-        }
-        return $categorias;
-    }
     public function nuevoPedido($datos)
     {
         try {

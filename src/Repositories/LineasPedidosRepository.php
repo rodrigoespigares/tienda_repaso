@@ -2,6 +2,7 @@
     namespace Repositories;
     use Lib\DataBase;
     use Models\LineasPedidos;
+    use Models\Productos;
     use PDOException;
     use PDO;
     class LineasPedidosRepository{
@@ -10,22 +11,24 @@
         function __construct(){
             $this->conection = new DataBase();
         }
-        public function findAll():? array {
-            $this->conection->querySQL("SELECT * FROM categorias;");
-            
-            return $this->extractAll();
-        }
-        public function extractAll():?array {
-            $resultados = [];
-            try{
-                $resultadosData = $this->conection->allRegister();
-                foreach ($resultadosData as $resultadoData){
-                    $resultados[]=LineasPedidos::fromArray($resultadoData);
+        public function findAll($id) :?array
+        {
+            try {
+                $this->sql = $this->conection->prepareSQL("SELECT productos.* FROM productos JOIN lineas_pedidos ON productos.id = lineas_pedidos.producto_id WHERE lineas_pedidos.pedido_id = :pedido_id;");
+                $this->sql->bindValue(":pedido_id", $id);
+                $this->sql->execute();
+                $resultados = $this->sql->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($resultados as $key => $resultadoData){
+                    
+                    
+                    $result[$key]= [ 'producto'=> Productos::fromArray($resultadoData), "id_pedido"=> $id];
                 }
-            }catch(PDOException){
-                $resultados=null;
+                $this->sql->closeCursor();
+            } catch (PDOException $e) {
+                $result = $e->getMessage();
             }
-            return $resultados;
+            $this->sql = null;
+            return $result;
         }
         public function nuevoPedido($id)  {
             try{

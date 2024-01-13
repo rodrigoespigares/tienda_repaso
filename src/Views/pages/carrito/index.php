@@ -1,6 +1,6 @@
 <section class="carrito">
     <?php foreach ($productosCarrito as $key => $productoCarrito) :?>
-
+        <?php if($productoCarrito['productos'][0]->getBorrado() == 0) :?>
         <article class="carrito__producto">
             <div class="carrito__producto__info">
                 <div class="carrito__producto__content">
@@ -17,6 +17,7 @@
                 <a href="">Borrar</a>
             </div>
         </article>
+        <?php endif;?>
     <?php endforeach;?>
 </section>
 <?php if(count($_SESSION["carrito"]) >0):?>

@@ -25,4 +25,7 @@
         public function borrar($id) :void {
             $this->repository->borrar($id);
         }
+        public function activar($id) :void {
+            $this->repository->activar($id);
+        }
     }

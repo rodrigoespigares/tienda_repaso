@@ -25,6 +25,9 @@
             if(isset($_POST['borrar'])){
                 $this->categoriasService->borrar($_POST['borrar']);
                 $this->gestionCategorias();
+            } elseif (isset($_POST['activar'])){
+                $this->categoriasService->activar($_POST['activar']);
+                $this->gestionCategorias();
             }elseif (isset($_POST['editar'])){
                 echo "SIN HACER";
             }
@@ -63,8 +66,11 @@
             if(isset($_POST['borrar'])){
                 $this->productosService->borrar($_POST['borrar']);
                 $this->gestionProductos();
+            } elseif (isset($_POST['activar'])){
+                $this->productosService->activar($_POST['activar']);
+                $this->gestionProductos();
             }elseif (isset($_POST['editar'])){
-                
+                echo "SIN HACER";
             }
         }
     }

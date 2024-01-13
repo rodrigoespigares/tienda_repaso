@@ -9,8 +9,12 @@
             <td><?=$cat->getId()?></td>
             <td><?=$cat->getNombre()?></td>
             <td>
-                <form action="<?=BASE_URL?>Admin/opcionesCategoria" method="POST">
-                    <button name="borrar" value="<?=$cat->getId()?>">Borrar</button>
+                <form action="<?=BASE_URL?>opcionesCat" method="POST">
+                    <?php if($cat->getBorrado()==0):?>
+                        <button name="borrar" value="<?=$cat->getId()?>">Desactivar</button>
+                    <?php else:?>
+                        <button name="activar" value="<?=$cat->getId()?>">Activar</button>
+                    <?php endif;?>
                     <button name="editar" value="<?=$cat->getId()?>">Editar</button>
                 </form>
             </td>

@@ -12,7 +12,7 @@
             <input type="password" name="data[password]" id="password">
             <p class="err"><?= isset($error['password']) ? $error['password'] : "" ?></p>
         </div>
-        <p>¿No tienes usuario?<a href="<?= BASE_URL ?>Login/login"> Haz click y registrate</a></p>
+        <p>¿No tienes usuario?<a href="<?= BASE_URL ?>login"> Haz click y registrate</a></p>
         <button type="submit">Login</button>
     </form>
 <?php elseif (!isset($_POST['login']) || isset($_POST['register'])) : ?>

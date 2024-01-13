@@ -9,10 +9,12 @@ use Services\ProductosService;
         private ProductosService $service;
         private Pages $pages;
         private PedidosService $pedidosService;
+        private LineasPedidosService $lineasService;
         public function __construct()
         {
             $this->pedidosService = new PedidosService();
             $this->service = new ProductosService();
+            $this->lineasService = new LineasPedidosService();
             $this->pages = new Pages();   
         }
         public function index():void {
@@ -76,5 +78,13 @@ use Services\ProductosService;
             $id = $_SESSION['identity']['id'];
             $result = $this->pedidosService->findAll($id);
             $this->pages->render("pages/carrito/misPedidos",["pedidos"=>$result]);
+        }
+        public function showDetalle(){
+            $id = $_SESSION['identity']['id'];
+            $result = $this->pedidosService->findAll($id);
+            $id_pedido = $_POST['detalle'];
+            $resultDetalles = $this->lineasService->findAll($id_pedido);
+            $this->pages->render("pages/carrito/misPedidos",["pedidos"=>$result,"detalles"=>$resultDetalles]);
+
         }
     }

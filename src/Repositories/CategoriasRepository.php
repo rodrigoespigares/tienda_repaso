@@ -42,7 +42,20 @@
         }
         public function borrar($id) :?string {
             try{
-                $this->sql = $this->conection->prepareSQL("DELETE FROM categorias WHERE id = :id;");
+                $this->sql = $this->conection->prepareSQL("UPDATE categorias SET borrado = 1 WHERE id = :id;");
+                $this->sql->bindValue(":id",$id);
+                $this->sql->execute();
+                $result = $this->sql->rowCount();
+            }catch(PDOException $e){
+                $result = $e->getMessage();
+            }
+            $this->sql->closeCursor();
+            $this->sql = null;
+            return $result;
+        }
+        public function activar($id) :?string {
+            try{
+                $this->sql = $this->conection->prepareSQL("UPDATE categorias SET borrado = 0 WHERE id = :id;");
                 $this->sql->bindValue(":id",$id);
                 $this->sql->execute();
                 $result = $this->sql->rowCount();

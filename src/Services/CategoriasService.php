@@ -16,6 +16,9 @@
         public function borrar($id) :void {
             $this->repository->borrar($id);
         }
+        public function activar($id) :void {
+            $this->repository->activar($id);
+        }
         public function editar($id) {
             $this->repository->editar($id);
         }

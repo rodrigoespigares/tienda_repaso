@@ -15,7 +15,8 @@ class Productos{
         private string $stock,
         private string $oferta,
         private string $fecha,
-        private string $imagen
+        private string $imagen,
+        private string $borrado
     ){}
 
     // Getter y Setter para $id
@@ -40,7 +41,11 @@ class Productos{
     public function getImagen(): string {
         return $this->imagen;
     }
-// Getter y Setter para $categoria_id
+    public function setImagen(string $imagen): void {
+        $this->imagen = $imagen;
+    }
+    
+    // Getter y Setter para $categoria_id
     public function getCategoriaId(): string {
         return $this->categoria_id;
     }
@@ -93,9 +98,13 @@ class Productos{
     public function setFecha(string $fecha): void {
         $this->fecha = $fecha;
     }
-    // Getter y Setter para $imagen
-    public function setImagen(string $imagen): void {
-        $this->imagen = $imagen;
+    // Getter y Setter para $borrado
+    public function getBorrado(): string {
+        return $this->borrado;
+    }
+
+    public function setBorrado(string $borrado): void {
+        $this->borrado = $borrado;
     }
     public static function fromArray(array $data): Productos
     {
@@ -109,6 +118,7 @@ class Productos{
             $data['oferta'] ?? "",
             $data['fecha'] ?? "",
             $data['imagen'] ?? "",
+            $data['borrado'] ?? "",
         );
     }
 }

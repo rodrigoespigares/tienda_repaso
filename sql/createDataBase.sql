@@ -20,6 +20,7 @@ DROP TABLE IF EXISTS categorias;
 CREATE TABLE IF NOT EXISTS categorias(
 id              int(255) auto_increment not null,
 nombre          varchar(100) not null,
+borrado         int(1) DEFAULT 0,
 CONSTRAINT pk_categorias PRIMARY KEY(id) 
 )ENGINE=InnoDb DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -35,6 +36,7 @@ stock           int(255) not null,
 oferta          varchar(2),
 fecha           date not null,
 imagen          varchar(255),
+borrado         int(1) DEFAULT 0,
 CONSTRAINT pk_categorias PRIMARY KEY(id),
 CONSTRAINT fk_producto_categoria FOREIGN KEY(categoria_id) REFERENCES categorias(id)
 )ENGINE=InnoDb DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

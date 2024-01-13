@@ -17,6 +17,9 @@
             Router::add('POST','/login', function (){
                 return (new LoginController())->login();
             });
+            Router::add('GET','/login', function (){
+                return (new LoginController())->login();
+            });
             // VALIDACION
             Router::add('POST','/vlogin', function (){
                 return (new LoginController())->vLogin();
@@ -25,7 +28,6 @@
             Router::add('POST','/logout', function (){
                 return (new LoginController())->logout();
             });
-            
             // ADMIN MENU
             Router::add('GET','/gestionCategorias', function (){
                 return (new AdminController())->gestionCategorias();
@@ -37,15 +39,20 @@
             Router::add('GET', '/c?id=:id', function ($id) {
                 return (new BaseController())->ver($id);
             });
-
             // AÑADIR CATEGORIAS Y PRODUCTOS
             Router::add('POST','/addC', function (){
-                return (new AdminController())->addProduct();
+                return (new AdminController())->addCategory();
             });
             Router::add('POST','/addP', function (){
                 return (new AdminController())->addProduct();
             });
-
+            // OPCIONES CATEGORIAS Y PRODUCTOS
+            Router::add('POST','/opcionesCat', function (){
+                return (new AdminController())->opcionesCategoria();
+            });
+            Router::add('POST','/opcionesProd', function (){
+                return (new AdminController())->opcionesProducto();
+            });
             //CARRITO
             Router::add('GET','/carrito', function (){
                 return (new CarritoController())->index();
@@ -70,7 +77,10 @@
             Router::add('GET','/mis_pedidos', function (){
                 return (new CarritoController())->showPedidos();
             });
-            
+            // DETALLE PEDIDO
+            Router::add('POST','/detalle_pedido', function (){
+                return (new CarritoController())->showDetalle();
+            });
 
             // ERROR 404
             Router::add('GET', '/error', function ($id) {

@@ -9,8 +9,12 @@
             <td><?=$key?></td>
             <td><?=$producto->getNombre()?></td>
             <td>
-                <form action="<?=BASE_URL?>Admin/opcionesProducto" method="POST">
-                    <button name="borrar" value="<?=$producto->getId()?>">Borrar</button>
+                <form action="<?=BASE_URL?>opcionesProd" method="POST">
+                    <?php if($producto->getBorrado()==0):?>
+                        <button name="borrar" value="<?=$producto->getId()?>">Desactivar</button>
+                    <?php else:?>
+                        <button name="activar" value="<?=$producto->getId()?>">Activar</button>
+                    <?php endif;?>
                     <button name="editar" value="<?=$producto->getId()?>">Editar</button>
                 </form>
             </td>

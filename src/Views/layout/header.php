@@ -43,7 +43,9 @@ $categoriasAdmin = array(
         <?php if(isset($categorias)):?>
             <nav>
                 <?php foreach ($categorias as $key => $categoria): ?>
-                    <a href="<?=BASE_URL?>c?id=<?= $categoria->getId()?>"><?= $categoria->getNombre()?></a>
+                    <?php if($categoria->getBorrado() == 0):?>
+                        <a href="<?=BASE_URL?>c?id=<?= $categoria->getId()?>"><?= $categoria->getNombre()?></a>
+                    <?php endif;?>
                 <?php endforeach;?>
                 <a href="<?=BASE_URL?>mis_pedidos">Mis pedidos</a>
             </nav>
