@@ -7,7 +7,8 @@ $categorias = $categoriasService->findAll();
 $categoriasAdmin = array(
     "gestionCategorias" => "Gestión de categorias",
     "gestionProductos" => "Gestión de productos",
-    "gestionPedidos" => "Gestión de pedidos"
+    "gestionPedidos" => "Gestión de pedidos",
+    "gestionUsuarios" => "Gestión de usuarios",
 );
 
 ?>

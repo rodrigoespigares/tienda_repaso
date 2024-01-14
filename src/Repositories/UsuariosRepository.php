@@ -61,4 +61,17 @@
         
             return $usuario;
         }
+        public function modRol($id,$rol){
+            try {
+                $this->sql = $this->conection->prepareSQL("UPDATE usuarios SET rol = :rol WHERE id = :id;");
+                $this->sql->bindValue(":id", $id);
+                $this->sql->bindValue(":rol", $rol);
+                $this->sql->execute();
+                $this->sql->closeCursor();
+            } catch (PDOException $e) {
+                $result = null;
+            }
+            $this->sql = null;
+            return $result;
+        }
     }

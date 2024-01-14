@@ -16,4 +16,7 @@
         public function getIdentity($email) {
             return $this->userRepository->getIdentity($email);
         }
+        public function modRol($id,$rol){
+            $this->userRepository->modRol($id,$rol);
+        }
     }

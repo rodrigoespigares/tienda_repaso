@@ -35,6 +35,12 @@
             Router::add('GET','/gestionProductos', function (){
                 return (new AdminController())->gestionProductos();
             });
+            Router::add('GET','/gestionUsuarios', function (){
+                return (new AdminController())->gestionUsuarios();
+            });
+            Router::add('GET','/gestionPedidos', function (){
+                return (new AdminController())->showAllPedidos();
+            });
             // CATEGORIAS MENU
             Router::add('GET', '/c?id=:id', function ($id) {
                 return (new BaseController())->ver($id);
@@ -91,11 +97,12 @@
                 return (new CarritoController())->showDetalle();
             });
             // GESTION DE PEDIDOS
-            Router::add('GET','/gestionPedidos', function (){
-                return (new AdminController())->showAllPedidos();
-            });
             Router::add('POST', '/changeEstado/:id', function ($id) {
                 return (new AdminController())->changeEstado($id);
+            });
+            // GESTION DE USUARIOS
+            Router::add('POST', '/editUser', function () {
+                return (new AdminController())->modRol();
             });
 
             // ERROR 404
