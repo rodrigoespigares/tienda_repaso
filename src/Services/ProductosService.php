@@ -28,4 +28,7 @@
         public function activar($id) :void {
             $this->repository->activar($id);
         }
+        public function editarProduct($array) {
+            $this->repository->editarProduct($array);
+        }
     }

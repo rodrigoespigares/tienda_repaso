@@ -128,4 +128,24 @@
             $this->sql = null;
             return $result;
         }
+        public function editarProduct($data) :void {
+            try{
+                $this->sql = $this->conection->prepareSQL("UPDATE productos SET categoria_id = :categoria_id , nombre= :nombre , descripcion= :descripcion , precio= :precio , stock= :stock ,oferta= :oferta , fecha= :fecha ,imagen= :imagen WHERE id = :id;;");
+                $this->sql->bindValue(":id",$data['id']);
+                $this->sql->bindValue(":categoria_id",$data['categoria_id']);
+                $this->sql->bindValue(":nombre",$data['nombre']);
+                $this->sql->bindValue(":descripcion",$data['descripcion']);
+                $this->sql->bindValue(":precio",$data['precio']);
+                $this->sql->bindValue(":stock",$data['stock']);
+                $this->sql->bindValue(":oferta",$data['oferta']);
+                $this->sql->bindValue(":fecha",$data['fecha']);
+                $this->sql->bindValue(":imagen",$data['imagen']);
+                $this->sql->execute();
+                $result = null;
+            }catch(PDOException $e){
+                $result = $e->getMessage();
+            }
+            $this->sql->closeCursor();
+            $this->sql = null;
+        }
     }

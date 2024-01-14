@@ -24,6 +24,10 @@
             $this->categoriasService->addCategory($_POST['nombre']);
             $this->gestionCategorias();
         }
+        public function editarCategoria() :void {
+            $this->categoriasService->editar($_POST['data']);
+            $this->gestionCategorias();
+        }
         public function opcionesCategoria() : void {
             if(isset($_POST['borrar'])){
                 $this->categoriasService->borrar($_POST['borrar']);
@@ -32,7 +36,9 @@
                 $this->categoriasService->activar($_POST['activar']);
                 $this->gestionCategorias();
             }elseif (isset($_POST['editar'])){
-                echo "SIN HACER";
+                $result = $this->categoriasService->find($_POST['editar']);
+                $categorias = $this->categoriasService->findAll();
+                $this->pages->render("pages/admin/gestionCategorias",["cats"=>$categorias,"categoriaEditar"=>$result]);
             }
         }
         public function gestionProductos() : void {
@@ -73,8 +79,40 @@
                 $this->productosService->activar($_POST['activar']);
                 $this->gestionProductos();
             }elseif (isset($_POST['editar'])){
-                echo "SIN HACER";
+                $productos = $this->productosService->findAll();
+                $categorias = $this->categoriasService->findAll();
+                $result = $this->productosService->find($_POST['editar']);
+                $this->pages->render("pages/admin/gestionProductos",["productos"=>$productos,"categorias"=>$categorias,"productoEditar"=>$result]);
             }
+        }
+        public function editarProduct() {
+            $array = $_POST['data'];
+            if ($_FILES['imagen']['tmp_name'] == ""){
+                $array['imagen'] = $_POST['imagen_anterior'];
+            }else{
+                if(is_uploaded_file($_FILES['imagen']["tmp_name"])){
+                    $nombreDirectorio = "subidas/";
+                    $nombreFichero = $_FILES['imagen']['name'];
+                    $nombreCompleto = $nombreDirectorio.$nombreFichero;
+                    if (!is_dir($nombreDirectorio)) {
+                        mkdir($nombreDirectorio, 0755, true);
+                        chown($nombreDirectorio, 'www-data');
+                    }
+                    if(is_file($nombreCompleto)){
+                        $idUnico=time();
+                        $nombreFichero = $idUnico."-".$nombreFichero;   
+                    }
+                    $array['imagen']=$nombreFichero;
+                    if(!move_uploaded_file($_FILES['imagen']['tmp_name'], $nombreDirectorio.$nombreFichero)){
+                        $errores['file'] = "Error en la subida";
+                    }
+                }
+                else{
+                    $errores['file'] = "Error en la carga";
+                }
+            }
+            $this->productosService->editarProduct($array);
+            $this->gestionProductos();
         }
         public function showAllPedidos() {
             $result = $this->pedidosService->findAll();

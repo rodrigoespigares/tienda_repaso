@@ -10,6 +10,9 @@
         public function findAll() :?array {
             return $this->repository->findAll();
         }
+        public function find($id) :?array {
+            return $this->repository->find($id);
+        }
         public function addCategory($nombre):void {
             $this->repository->addCategory($nombre);
         }
@@ -19,7 +22,8 @@
         public function activar($id) :void {
             $this->repository->activar($id);
         }
-        public function editar($id) {
-            $this->repository->editar($id);
+        public function editar($array) {
+            $this->repository->editar($array);
         }
+
     }

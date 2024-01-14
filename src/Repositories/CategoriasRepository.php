@@ -15,6 +15,22 @@
             
             return $this->extractAll();
         }
+        public function find($id) :? array{
+            $resultado = [];
+            try{
+                $this->sql = $this->conection->prepareSQL("SELECT * FROM categorias WHERE id=:id;");
+                $this->sql->bindValue(":id", $id);
+                $this->sql->execute();
+                $resultados = $this->sql->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($resultados as $resultadoData){
+                    $resultado[]=Categorias::fromArray($resultadoData);
+                }
+                $this->sql->closeCursor();
+            }catch(PDOException $e){
+                    $resultado = $e->getMessage();
+            }
+            return $resultado;
+        }
         public function extractAll():?array {
             $categorias = [];
             try{
@@ -66,10 +82,11 @@
             $this->sql = null;
             return $result;
         }
-        public function editar($id) :?string {
+        public function editar($array) :?string {
             try{
-                $this->sql = $this->conection->prepareSQL("DELETE FROM categorias WHERE id = :id;");
-                $this->sql->bindValue(":id",$id);
+                $this->sql = $this->conection->prepareSQL("UPDATE categorias SET nombre = :nombre WHERE id = :id;");
+                $this->sql->bindValue(":id",$array['id']);
+                $this->sql->bindValue(":nombre",$array['nombre']);
                 $this->sql->execute();
                 $result = $this->sql->rowCount();
             }catch(PDOException $e){

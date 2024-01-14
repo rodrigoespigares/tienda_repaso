@@ -46,6 +46,15 @@
             Router::add('POST','/addP', function (){
                 return (new AdminController())->addProduct();
             });
+
+            // EDITAR CATEGORIAS Y PRODUCTOS
+            Router::add('POST','/editC', function (){
+                return (new AdminController())->editarCategoria();
+            });
+            Router::add('POST','/editP', function (){
+                return (new AdminController())->editarProduct();
+            });
+
             // OPCIONES CATEGORIAS Y PRODUCTOS
             Router::add('POST','/opcionesCat', function (){
                 return (new AdminController())->opcionesCategoria();

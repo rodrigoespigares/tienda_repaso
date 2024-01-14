@@ -20,3 +20,9 @@
     width: 100%;
     border-radius: .3rem;
 }
+.foto__prueba{
+    width: 100px;
+}
+.foto__prueba img{
+    width: 100%;
+}
