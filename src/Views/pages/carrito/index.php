@@ -26,4 +26,9 @@
             <button type="submit">Realizar pedido</button>
         </form>
     </section>
+<?php else:?>
+    <section>
+        <h2>Aun no hay ada añadido:</h2>
+        <a href="<?=BASE_URL?>">Volver al inicio</a>
+    </section>
 <?php endif;?>

@@ -50,8 +50,15 @@
     font-size: 1rem;
     color: var(--primary);
 }
-.detalle__producto a{
+.detalle__producto a, .detalle__producto__dos a{
     color: var(--secondary);
     text-decoration: none;
     font-size: 2rem;
+}
+.detalle__producto__dos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid var(--secondary);
+    padding: 2rem;
 }

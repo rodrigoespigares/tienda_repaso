@@ -5,11 +5,13 @@
     use Services\ProductosService;
     use Services\PedidosService;
     use Services\UsuariosService;
+    use Services\LineasPedidosService;
     class AdminController{
         private CategoriasService $categoriasService;
         private ProductosService $productosService;
         private PedidosService $pedidosService;
         private UsuariosService $usuariosService;
+        private LineasPedidosService $lineasService;
         private Pages $pages;
         public function __construct()
         {
@@ -17,6 +19,7 @@
             $this->productosService = new ProductosService();
             $this->pedidosService = new PedidosService();
             $this->usuariosService = new UsuariosService();
+            $this->lineasService = new LineasPedidosService();
             $this->pages = new Pages();
         }
         public function gestionCategorias() : void {
@@ -120,6 +123,12 @@
         public function showAllPedidos() {
             $result = $this->pedidosService->findAll();
             $this->pages->render("pages/admin/gestionPedidos",["pedidos"=>$result]);
+        }
+        public function showDetallePedidos() {
+            $result = $this->pedidosService->findAll();
+            $id_pedido = $_POST['detalle'];
+            $resultDetalles = $this->lineasService->findAll($id_pedido);
+            $this->pages->render("pages/admin/gestionPedidos",["pedidos"=>$result,"detalles"=>$resultDetalles]);
         }
         public function changeEstado($id){
             $this->pedidosService->changeEstado($id,$_POST['estado']);

@@ -23,31 +23,31 @@
                 </form>
             </td>
             <td>
-                <form action="<?=BASE_URL ?>detalle_pedido" method="post">
+                <form action="<?=BASE_URL ?>detalle_pedido_admin" method="post">
                     <button type="submit" name="detalle" value="<?=$value->getId()?>">Detalle</button>
                 </form>
             </td>
         </tr>
-        <?php if(isset($detalles) && $detalles[0]['id_pedido']==$pedido->getId()):?>
-            <article class="detalle__producto">
-                <div class="detalle__producto--cabecera">
-                <h2>Detalles de su pedido:</h2>
-                <a href="<?=BASE_URL?>mis_pedidos"><i class="ph-light ph-x"></i></a>
-                </div>
-                <div>
-                    <?php foreach ($detalles as $value) :?>
-                        
-                        <div class="carrito__producto__info">
-                            <div class="carrito__producto__content">
-                                <img src="<?=BASE_URL."/subidas/".$value['producto']->getImagen()?>" alt="Producto" class="carrito__producto__content__img">
-                            </div>
-                            <p><?= $value['producto']->getNombre()?></p>
-                        </div>
+        
+    <?php    endforeach;?>
+    <?php if(isset($detalles)):?>
+        <article class="detalle__producto__dos">
+            <div class="detalle__producto--cabecera">
+            <h2>Detalles de su pedido:</h2>
+            <a href="<?=BASE_URL?>gestionPedidos"><i class="ph-light ph-x"></i></a>
+            </div>
+            <div>
+                <?php foreach ($detalles as $detalle) :?>
                     
-                    <?php endforeach;?>
-                </div>
-            </article>
-        <?php endif;?>
-    <?php    endforeach;
-?>
+                    <div class="carrito__producto__info">
+                        <div class="carrito__producto__content">
+                            <img src="<?=BASE_URL."/subidas/".$detalle['producto']->getImagen()?>" alt="Producto" class="carrito__producto__content__img">
+                        </div>
+                        <p><?= $detalle['producto']->getNombre()?></p>
+                    </div>
+                
+                <?php endforeach;?>
+            </div>
+        </article>
+    <?php endif;?>
 </table>

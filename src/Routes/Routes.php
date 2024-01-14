@@ -96,6 +96,9 @@
             Router::add('POST','/detalle_pedido', function (){
                 return (new CarritoController())->showDetalle();
             });
+            Router::add('POST','/detalle_pedido_admin', function (){
+                return (new AdminController())->showDetallePedidos();
+            });
             // GESTION DE PEDIDOS
             Router::add('POST', '/changeEstado/:id', function ($id) {
                 return (new AdminController())->changeEstado($id);
