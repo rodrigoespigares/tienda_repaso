@@ -67,7 +67,6 @@
         }
         public function pedir(){
             $datos = $_POST['data'];
-            
             $usuario = $_SESSION['identity']['nombre'];
             $email = $_SESSION['identity']['email'];
             # VALIDAR DATOS
