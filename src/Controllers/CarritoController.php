@@ -1,13 +1,14 @@
 <?php
     namespace Controllers;
     use Lib\Pages;
-use Models\Pedidos;
-use Services\ProductosService;
+    use Lib\Correo;
+    use Services\ProductosService;
     use Services\PedidosService;
     use Services\LineasPedidosService;
     class CarritoController{
         private ProductosService $service;
         private Pages $pages;
+        private Correo $correo;
         private PedidosService $pedidosService;
         private LineasPedidosService $lineasService;
         public function __construct()
@@ -16,6 +17,7 @@ use Services\ProductosService;
             $this->service = new ProductosService();
             $this->lineasService = new LineasPedidosService();
             $this->pages = new Pages();   
+            $this->correo = new Correo();
         }
         public function index():void {
             $respuesta = [];            
@@ -72,6 +74,7 @@ use Services\ProductosService;
             # PRIMERO RESTAR EL STOCK
             $this->service->nuevoPedido($datos);
             $_SESSION['carrito'] = null;
+            $this->correo->sendMail($email,$usuario);
             header("Location:".BASE_URL);
         }
         public function showPedidos(){
