@@ -46,9 +46,4 @@
         </div>
         <button type="submit">Registrar</button>
     </form>
-
-
-
-
-
 <?php endif; ?>
