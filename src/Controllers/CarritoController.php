@@ -49,15 +49,33 @@
             }
         }
         /**
+         * Función para borrar del carrito
+         * 
+         * @param string $id con el id del producto a borrar
+         */
+        public function borrar(string $id):void {
+            foreach ($_SESSION['carrito'] as $key => $value) {
+                if($value['id']==$id){
+                    $_SESSION['carrito'][$key]["unidades"] = 0;
+                    if ($_SESSION['carrito'][$key]["unidades"]==0) {
+                        unset($_SESSION['carrito'][$key]);
+                    }
+                }
+                header("Location:".BASE_URL."carrito");
+            }
+        }
+        /**
          * Función para añadir un producto al carrito
          */
         public function push() {
             $id = intval($_GET["id"]);
-            if(!isset($_SESSION['carrito'][$id])){
-                $result = $this->service->find($id);
-                array_push($_SESSION['carrito'], ["id"=>$id,"unidades"=>1,"producto"=>serialize($result)]);
-            }else{
-                $_SESSION['carrito'][$id]["unidades"]++;
+            $result = $this->service->find($id);
+            if($result[0]->getStock()>0 && $result[0]->getBorrado() == 0){
+                if(!isset($_SESSION['carrito'][$id])){
+                    array_push($_SESSION['carrito'], ["id"=>$id,"unidades"=>1,"producto"=>serialize($result)]);
+                }else{
+                    $_SESSION['carrito'][$id]["unidades"]++;
+                }
             }
             header("Location:".BASE_URL);
         }

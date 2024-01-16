@@ -14,7 +14,7 @@
                 <a href="<?=BASE_URL?>add?id=<?=$productoCarrito['id']?>">+</a>
             </div>
             <div class="carrito__producto__delete">
-                <a href="">Borrar</a>
+                <a href="<?=BASE_URL?>/borrar/<?=$productoCarrito['id']?>">Borrar</a>
             </div>
         </article>
         <?php endif;?>

@@ -81,6 +81,9 @@
             Router::add('GET', '/down?id=:id', function ($id) {
                 return (new CarritoController())->down($id);
             });
+            Router::add('GET', '/borrar/:id', function ($id) {
+                return (new CarritoController())->borrar($id);
+            });
 
             //PEDIDO
             Router::add('POST','/pedido', function (){
