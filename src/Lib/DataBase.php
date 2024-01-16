@@ -26,21 +26,30 @@ class DataBase extends PDO
             exit;
         }
     }
+    /**
+     * Funcion para pasar una sentencia SQL
+     */
     public function querySQL(string $querySQL): void
     {
         $this->result = $this->query($querySQL);
     }
-
+    /**
+     * Funcion para sacar el ultimo registro
+     */
     public function register(): array
     {
         return ($fila = $this->result->fetch(PDO::FETCH_ASSOC)) ? $fila : false;
     }
-
+    /**
+     * Función para todos los registros
+     */
     public function allRegister(): array
     {
         return $this->result->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    /**
+     * Sentencia sql preparada
+     */
     public function prepareSQL(string $querySQL)
     {
         return $this->prepare($querySQL);

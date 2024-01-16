@@ -106,6 +106,9 @@ class Productos{
     public function setBorrado(string $borrado): void {
         $this->borrado = $borrado;
     }
+    /**
+     * Crea un producto a partir de un array
+     */
     public static function fromArray(array $data): Productos
     {
         return new Productos(

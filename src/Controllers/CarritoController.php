@@ -2,6 +2,7 @@
     namespace Controllers;
     use Lib\Pages;
     use Lib\Correo;
+    use Lib\Utils;
     use Services\ProductosService;
     use Services\PedidosService;
     use Services\LineasPedidosService;
@@ -19,6 +20,9 @@
             $this->pages = new Pages();   
             $this->correo = new Correo();
         }
+        /**
+         * Función para ver todos los productos del carrito
+         */
         public function index():void {
             $respuesta = [];            
             foreach ($_SESSION['carrito'] as $value) {
@@ -27,6 +31,9 @@
             }
             $this->pages->render("pages/carrito/index",["productosCarrito"=>$respuesta]);
         }
+        /**
+         * Función para quitar un producto de la cantidad total del carrito
+         */
         public function down():void {
             if(isset($_GET['id'])){
                 $id = $_GET['id'];
@@ -41,6 +48,9 @@
                 }
             }
         }
+        /**
+         * Función para añadir un producto al carrito
+         */
         public function push() {
             $id = intval($_GET["id"]);
             if(!isset($_SESSION['carrito'][$id])){
@@ -51,6 +61,9 @@
             }
             header("Location:".BASE_URL);
         }
+        /**
+         * Función para añadir un producto de la cantidad total del carrito
+         */
         public function add(){
             $id = $_GET["id"];
             foreach ($_SESSION['carrito'] as $key => $value) {
@@ -62,10 +75,18 @@
                 header("Location:".BASE_URL."carrito");
             }
         }
+        /**
+         * Función para cargar el formulario del carrito
+         */
         public function pedido(){
+            Utils::checkSesion();
             $this->pages->render("pages/carrito/pedido",["carrito"=>$_SESSION['carrito']]);
         }
+        /**
+         * Función para realizar el pedido
+         */
         public function pedir(){
+            Utils::checkSesion();
             $datos = $_POST['data'];
             $usuario = $_SESSION['identity']['nombre'];
             $email = $_SESSION['identity']['email'];
@@ -76,12 +97,20 @@
             $this->correo->sendMail($email,$usuario);
             header("Location:".BASE_URL);
         }
+        /**
+         * Función para que cada usuario pueda ver sus pedidos
+         */
         public function showPedidos(){
+            Utils::checkSesion();
             $id = $_SESSION['identity']['id'];
             $result = $this->pedidosService->find($id);
             $this->pages->render("pages/carrito/misPedidos",["pedidos"=>$result]);
         }
+        /**
+         * Función para ver los usuario puedan ver los detalles de cada pedido
+         */
         public function showDetalle(){
+            Utils::checkSesion();
             $id = $_SESSION['identity']['id'];
             $result = $this->pedidosService->find($id);
             $id_pedido = $_POST['detalle'];

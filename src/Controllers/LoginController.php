@@ -18,9 +18,15 @@ use Lib\Pages;
             $this->userService = new UsuariosService();
             $this->pages = new Pages();
         }
+        /**
+         * Función para cargar el login
+         */
         public function login():void{
             $this->pages->render("pages/login/formLogin");
         }
+        /**
+         * Función para validar los datos introducidos en el login y en el registro
+         */
         public function vLogin():?array{
             $registro = $_POST['data'];            
             
@@ -32,7 +38,7 @@ use Lib\Pages;
                     $this->userService->register($registro['name'],$registro['subname'],$registro['email'],$registro['password']);
                     header("Location:".BASE_URL);
                 }else{
-                    $this->pages->render("pages/login/formLogin",["errores"=>$errores]);
+                    $this->pages->render("pages/login/formLogin",["errores"=>$errores,"relleno"=>$registro]);
                 }
             }elseif ($_POST['isLogin']==="true") {
                 $error = [];
@@ -50,19 +56,22 @@ use Lib\Pages;
                             header("Location:".BASE_URL);
                         }else{
                             $error["password"]="Error en la contraseña";
-                            $this->pages->render("pages/login/formLogin",["error"=>$error]);
+                            $this->pages->render("pages/login/formLogin",["error"=>$error,"relleno"=>$registro]);
                         }
                     }else{
                         $error['email'] = "Email no registrado";
-                        $this->pages->render("pages/login/formLogin",["error"=>$error]);
+                        $this->pages->render("pages/login/formLogin",["error"=>$error,"relleno"=>$registro]);
                     }
                 }else{
                     $error['password'] = "Contraseña sin introducir";
-                    $this->pages->render("pages/login/formLogin",["error"=>$error]);
+                    $this->pages->render("pages/login/formLogin",["error"=>$error,"relleno"=>$registro]);
                 }
             }   
             return null;
         }
+        /**
+         * Función para cerrar la sesión
+         */
         public function logout(){
             $_SESSION['identity']=null;
             $_SESSION['admin']=null;

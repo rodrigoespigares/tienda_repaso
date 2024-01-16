@@ -30,6 +30,9 @@
         </tr>
         
     <?php    endforeach;?>
+    <?php if(isset($errores['estado'])) :?>
+        <p class="err"><?=$errores['estado']?></p>
+    <?php endif;?>
     <?php if(isset($detalles)):?>
         <article class="detalle__producto__dos">
             <div class="detalle__producto--cabecera">

@@ -119,6 +119,9 @@ class Usuarios
             $data['rol'] ?? "user",
         );
     }
+    /**
+     * Función para validar un usuario
+     */
     public static function validation(array $data, array &$errores): array
     {
         $pass1 = $data['password'];
@@ -163,6 +166,9 @@ class Usuarios
 
         return $errores;
     }
+    /**
+     * Funcion para validar el usuario si es un login
+     */
     public static function validationLogin(array $data,array &$errores) : array {
         $pass1 = $data['password'];
         $email = $data['email'];

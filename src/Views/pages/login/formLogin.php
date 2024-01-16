@@ -4,7 +4,7 @@
         <input type="text" name="isLogin" value="true" hidden>
         <div>
             <label for="email">Email</label>
-            <input type="text" name="data[email]" id="email">
+            <input type="text" name="data[email]" id="email" value="<?=isset($relleno['email'])?$relleno['email']:""?>">
             <p class="err"><?= isset($error['email']) ? $error['email'] : "" ?></p>
         </div>
         <div>
@@ -21,7 +21,7 @@
         <input type="text" name="isLogin" value="false" hidden>
         <div>
             <label for="email">Email</label>
-            <input type="text" name="data[email]" id="email">
+            <input type="text" name="data[email]" id="email" value="<?=isset($relleno['email'])?$relleno['email']:""?>">
             <p class="err"><?= isset($errores['email']) ? $errores['email'] : "" ?></p>
         </div>
         <div>
@@ -36,12 +36,12 @@
         </div>
         <div>
             <label for="name">Nombre</label>
-            <input type="text" name="data[name]" id="name">
+            <input type="text" name="data[name]" id="name" value="<?=isset($relleno['name'])?$relleno['name']:""?>">
             <p ><?= isset($errores['name']) ? $errores['name'] : "" ?></p>
         </div>
         <div>
             <label for="subname">Apellidos</label>
-            <input type="text" name="data[subname]" id="subname">
+            <input type="text" name="data[subname]" id="subname" value="<?=isset($relleno['subname'])?$relleno['subname']:""?>">
             <p class="err"><?= isset($errores['subname']) ? $errores['subname'] : "" ?></p>
         </div>
         <button type="submit">Registrar</button>

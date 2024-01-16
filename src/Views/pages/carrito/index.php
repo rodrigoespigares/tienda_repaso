@@ -20,11 +20,16 @@
         <?php endif;?>
     <?php endforeach;?>
 </section>
-<?php if(count($_SESSION["carrito"]) >0):?>
+<?php if(count($_SESSION["carrito"]) >0 && isset($_SESSION['identity'])):?>
     <section>
         <form action="<?=BASE_URL?>pedido" method="POST">
             <button type="submit">Realizar pedido</button>
         </form>
+    </section>
+<?php elseif(!isset($_SESSION['identity'])):?>
+    <section>
+        <h2>Inicia sesion antes de realizar el pedido:</h2>
+        <a href="<?=BASE_URL?>login">Iniciar sesión</a>
     </section>
 <?php else:?>
     <section>

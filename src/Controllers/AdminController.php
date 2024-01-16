@@ -1,6 +1,9 @@
 <?php
     namespace Controllers;
+    use Models\Categorias;
+    use Models\Pedidos;
     use Lib\Pages;
+    use Lib\Utils;
     use Services\CategoriasService;
     use Services\ProductosService;
     use Services\PedidosService;
@@ -22,19 +25,52 @@
             $this->lineasService = new LineasPedidosService();
             $this->pages = new Pages();
         }
+        /**
+         * Función para gestionar las categorias
+         */
         public function gestionCategorias() : void {
+            Utils::checkSesionAdmin();
             $categorias = $this->categoriasService->findAll();
             $this->pages->render("pages/admin/gestionCategorias",["cats"=>$categorias]);
         }
+        /**
+         * Función para añadir una categoria
+         */
         public function addCategory() : void {
-            $this->categoriasService->addCategory($_POST['nombre']);
-            $this->gestionCategorias();
+            Utils::checkSesionAdmin();
+            $data['name']=$_POST['nombre'];
+            $errores = [];
+            Categorias::validation($data,$errores);
+            if(empty($errores)){
+                $this->categoriasService->addCategory($_POST['nombre']);
+                $this->gestionCategorias();
+            }else{
+                $categorias = $this->categoriasService->findAll();
+                $this->pages->render("pages/admin/gestionCategorias",["cats"=>$categorias,"errores"=>$errores]);
+            }
         }
+        /**
+         * Función para editar las categorias
+         */
         public function editarCategoria() :void {
-            $this->categoriasService->editar($_POST['data']);
-            $this->gestionCategorias();
+            Utils::checkSesionAdmin();
+            $data['name'] = $_POST['data']['nombre'];
+            $errores = [];
+            Categorias::validation($data,$errores);
+            if(empty($errores)){
+                $this->categoriasService->editar($_POST['data']);
+                $this->gestionCategorias();
+            }else{
+                $result = $this->categoriasService->find($_POST['data']['id']);
+                $categorias = $this->categoriasService->findAll();
+                $this->pages->render("pages/admin/gestionCategorias",["cats"=>$categorias,"categoriaEditar"=>$result,"errores"=>$errores]);
+            }
         }
+        /**
+         * Función para gestionar las opciones de las categorias
+         */
         public function opcionesCategoria() : void {
+            Utils::checkSesionAdmin();
             if(isset($_POST['borrar'])){
                 $this->categoriasService->borrar($_POST['borrar']);
                 $this->gestionCategorias();
@@ -47,12 +83,20 @@
                 $this->pages->render("pages/admin/gestionCategorias",["cats"=>$categorias,"categoriaEditar"=>$result]);
             }
         }
+        /**
+         * Función para gestionar los productos
+         */
         public function gestionProductos() : void {
+            Utils::checkSesionAdmin();
             $productos = $this->productosService->findAll();
             $categorias = $this->categoriasService->findAll();
             $this->pages->render("pages/admin/gestionProductos",["productos"=>$productos,"categorias"=>$categorias]);
         }
+        /**
+         * Función para añadir un producto
+         */
         public function addProduct() : void {
+            Utils::checkSesionAdmin();
             
             if(is_uploaded_file($_FILES['imagen']["tmp_name"])){
                 $nombreDirectorio = "subidas/";
@@ -77,7 +121,11 @@
             $this->productosService->addProduct($_POST['data']);
             $this->gestionProductos();
         }
+        /**
+         * Función para gestionar las opciones de los productos
+         */
         public function opcionesProducto() : void {
+            Utils::checkSesionAdmin();
             if(isset($_POST['borrar'])){
                 $this->productosService->borrar($_POST['borrar']);
                 $this->gestionProductos();
@@ -91,7 +139,11 @@
                 $this->pages->render("pages/admin/gestionProductos",["productos"=>$productos,"categorias"=>$categorias,"productoEditar"=>$result]);
             }
         }
+        /**
+         * Función para editar los productos
+         */
         public function editarProduct() {
+            Utils::checkSesionAdmin();
             $array = $_POST['data'];
             if ($_FILES['imagen']['tmp_name'] == ""){
                 $array['imagen'] = $_POST['imagen_anterior'];
@@ -120,25 +172,52 @@
             $this->productosService->editarProduct($array);
             $this->gestionProductos();
         }
+        /**
+         * Función para ver todos los pedidos
+         */
         public function showAllPedidos() {
+            Utils::checkSesionAdmin();
             $result = $this->pedidosService->findAll();
             $this->pages->render("pages/admin/gestionPedidos",["pedidos"=>$result]);
         }
+        /**
+         * Función para ver todos productos de cada pedido
+         */
         public function showDetallePedidos() {
+            Utils::checkSesionAdmin();
             $result = $this->pedidosService->findAll();
             $id_pedido = $_POST['detalle'];
             $resultDetalles = $this->lineasService->findAll($id_pedido);
             $this->pages->render("pages/admin/gestionPedidos",["pedidos"=>$result,"detalles"=>$resultDetalles]);
         }
+        /**
+         * Función para cambiar el estado del pedido
+         */
         public function changeEstado($id){
-            $this->pedidosService->changeEstado($id,$_POST['estado']);
-            header("Location:".BASE_URL."gestionPedidos");
+            Utils::checkSesionAdmin();
+            $errores = [];
+            Pedidos::validationEdit($_POST['estado'],$errores);
+            if(empty($errores)){
+                $this->pedidosService->changeEstado($id,$_POST['estado']);
+                header("Location:".BASE_URL."gestionPedidos");
+            }else{
+                $result = $this->pedidosService->findAll();
+                $this->pages->render("pages/admin/gestionPedidos",["pedidos"=>$result, "errores"=>$errores]);
+            }
         }
+        /**
+         * Función para gestionar los usuarios
+         */
         public function gestionUsuarios() : void {
+            Utils::checkSesionAdmin();
             $usuarios = $this->usuariosService->allUsers();
             $this->pages->render("pages/admin/gestionUsuarios",["usuarios"=>$usuarios]);
         }
+        /**
+         * Función para modificar el rol de los usuarios
+         */
         public function modRol() {
+            Utils::checkSesionAdmin();
             $id = $_POST['editar'];
             $rol = $_POST['edit'];
             $this->usuariosService->modRol($id,$rol);

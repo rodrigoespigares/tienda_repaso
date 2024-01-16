@@ -44,7 +44,9 @@ $categoriasAdmin = array(
                 </form>
             
         <?php endif;?>
-        <a href="<?=BASE_URL?>carrito">CARRITO</a>
+        
+            <a href="<?=BASE_URL?>carrito">CARRITO</a>
+        
         </div>
         <?php if(isset($categorias)):?>
             <nav>
@@ -53,7 +55,9 @@ $categoriasAdmin = array(
                         <a href="<?=BASE_URL?>c?id=<?= $categoria->getId()?>"><?= $categoria->getNombre()?></a>
                     <?php endif;?>
                 <?php endforeach;?>
-                <a href="<?=BASE_URL?>mis_pedidos">Mis pedidos</a>
+                <?php if(isset($_SESSION['identity'])):?>
+                    <a href="<?=BASE_URL?>mis_pedidos">Mis pedidos</a>
+                <?php endif;?>
             </nav>
         <?php endif;?>
         <?php if(isset($_SESSION['identity']) && $_SESSION['identity']['rol']=='admin'):?>
