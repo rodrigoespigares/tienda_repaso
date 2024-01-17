@@ -13,6 +13,9 @@
             Router::add('GET','/', function (){
                 return (new BaseController())->showPage();
             });
+            Router::add('GET','/?page=:id', function ($id){
+                return (new BaseController())->showPage($id);
+            });
             // LOGIN
             Router::add('POST','/login', function (){
                 return (new LoginController())->login();

@@ -116,8 +116,8 @@
             # VALIDAR DATOS
             # PRIMERO RESTAR EL STOCK
             $this->service->nuevoPedido($datos);
+            $this->correo->sendMail($email,$usuario, $_SESSION['carrito']);
             $_SESSION['carrito'] = null;
-            $this->correo->sendMail($email,$usuario);
             header("Location:".BASE_URL);
         }
         /**
