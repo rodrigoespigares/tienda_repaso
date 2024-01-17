@@ -110,7 +110,12 @@
             Router::add('POST', '/editUser', function () {
                 return (new AdminController())->modRol();
             });
-
+            Router::add('POST', '/addUserAdmin', function () {
+                return (new AdminController())->addUserAdmin();
+            });
+            Router::add('POST', '/vloginAdmin', function () {
+                return (new LoginController())->vLoginAdmin();
+            });
             // ERROR 404
             Router::add('GET', '/error', function () {
                 return (new ErrorController())->show_err404();

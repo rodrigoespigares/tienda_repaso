@@ -69,6 +69,22 @@ use Lib\Pages;
             }   
             return null;
         }
+
+        public function vLoginAdmin():void{
+            $registro = $_POST['data'];            
+            
+            if ($_POST['isLogin']==="false") {
+                $errores = [];
+                Usuarios::validation($registro,$errores);
+                if (empty($errores)) {
+                    $registro["password"] = password_hash($registro['password'], PASSWORD_BCRYPT,["cost"=>4]);
+                    $this->userService->register($registro['name'],$registro['subname'],$registro['email'],$registro['password'],$registro['rol']);
+                    header("Location:".BASE_URL."gestionUsuarios");
+                }else{
+                    $this->pages->render("pages/admin/gestionUsuarios",["errores"=>$errores,"relleno"=>$registro]);
+                }
+            }
+        }
         /**
          * Función para cerrar la sesión
          */

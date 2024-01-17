@@ -124,4 +124,51 @@ class Productos{
             $data['borrado'] ?? "",
         );
     }
+    /**
+     * Función para validar un producto
+     */
+    public static function validation(array $data, array &$errores): array
+    {
+        #Comprobar que tenga una buena forma;
+        ##############
+        #   Nombre   #
+        ##############
+        if (empty($data['nombre'])) {
+            $errores['nombre'] = "Nombre obligatorio";
+        } elseif (!Validar::son_letras($data['nombre'])) {
+            $errores['nombre'] = "Nombre tiene caracteres extraños";
+        }
+        #####################
+        #    Descripcion    #
+        #####################
+        if (empty($data['descripcion'])) {
+            $errores['descripcion'] = "Descripcion obligatorio";
+        } elseif (!Validar::son_letras($data['descripcion'])) {
+            $errores['descripcion'] = "Descripcion tiene caracteres extraños";
+        }
+        ##############
+        #   Precio   #
+        ##############
+        if (empty($data['precio'])) {
+            $errores['precio'] = "Precio obligatorio";
+        } elseif ($data['precio']<=0) {
+            $errores['precio'] = "Precio es menor o igual que 0";
+        }
+        ##############
+        #    Stock   #
+        ##############
+        if (empty($data['stock'])) {
+            $errores['stock'] = "Stock obligatorio";
+        }
+        ##############
+        #    Fecha   #
+        ##############
+        if (empty($data['fecha'])) {
+            $errores['fecha'] = "Fecha obligatorio";
+        }elseif (!Validar::validarFecha($data['fecha'])) {
+            $errores['fecha'] = "Formato incorrecto";
+        }
+
+        return $errores;
+    }
 }

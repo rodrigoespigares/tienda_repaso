@@ -70,12 +70,17 @@
         public function push() {
             $id = intval($_GET["id"]);
             $result = $this->service->find($id);
-            if($result[0]->getStock()>0 && $result[0]->getBorrado() == 0){
-                if(!isset($_SESSION['carrito'][$id])){
-                    array_push($_SESSION['carrito'], ["id"=>$id,"unidades"=>1,"producto"=>serialize($result)]);
-                }else{
-                    $_SESSION['carrito'][$id]["unidades"]++;
+            $isAdd = false;
+            foreach ($_SESSION['carrito'] as $key => $value) {
+                if($value['id']==$id){
+                    $isAdd = true;
+                    if($_SESSION['carrito'][$key]["unidades"]+1 <= $result[0]->getStock()){
+                        $_SESSION['carrito'][$key]["unidades"]++;
+                    }
                 }
+            }
+            if(!$isAdd && $result[0]->getStock()>0 && $result[0]->getBorrado() == 0){
+                array_push($_SESSION['carrito'], ["id"=>$id,"unidades"=>1,"producto"=>serialize($result)]);
             }
             header("Location:".BASE_URL);
         }

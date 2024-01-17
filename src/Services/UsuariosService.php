@@ -22,8 +22,8 @@
          * @param string $email con el email del usuario
          * @param string $password con la pass del usuario
          */
-        public function register(string $nombre,string $apellidos,string $email,string $password):void{
-            $this->userRepository->registro($nombre,$apellidos,$email,$password);
+        public function register(string $nombre,string $apellidos,string $email,string $password,string $rol = "user"):void{
+            $this->userRepository->registro($nombre,$apellidos,$email,$password,$rol);
         }
         /**
          * Funcion para buscar todos los datos del usuario

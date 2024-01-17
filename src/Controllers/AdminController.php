@@ -2,6 +2,7 @@
     namespace Controllers;
     use Models\Categorias;
     use Models\Pedidos;
+    use Models\Productos;
     use Lib\Pages;
     use Lib\Utils;
     use Services\CategoriasService;
@@ -97,29 +98,43 @@
          */
         public function addProduct() : void {
             Utils::checkSesionAdmin();
+            $productos = $this->productosService->findAll();
+            $categorias = $this->categoriasService->findAll();
+            $datos = $_POST['data'];
+            $errores = [];
+            Productos::validation($datos,$errores);
+            if(empty($errores)){
+                if(is_uploaded_file($_FILES['imagen']["tmp_name"])){
+                    $nombreDirectorio = "subidas/";
+                    $nombreFichero = $_FILES['imagen']['name'];
+                    $nombreCompleto = $nombreDirectorio.$nombreFichero;
+                    if (!is_dir($nombreDirectorio)) {
+                        mkdir($nombreDirectorio, 0755, true);
+                        chown($nombreDirectorio, 'www-data');
+                    }
+                    if(is_file($nombreCompleto)){
+                        $idUnico=time();
+                        $nombreFichero = $idUnico."-".$nombreFichero;   
+                    }
+                    $_POST['data']['imagen']=$nombreFichero;
+                    if(!move_uploaded_file($_FILES['imagen']['tmp_name'], $nombreDirectorio.$nombreFichero)){
+                        $errores['file'] = "Error en la subida";
+                    }
+                }
+                else{
+                    $errores['file'] = "Error en la carga";
+                }
+                if(empty($errores)){
+                    $this->productosService->addProduct($_POST['data']);
+                    $this->gestionProductos();
+                }else{
+                    $this->pages->render("pages/admin/gestionProductos",["productos"=>$productos,"categorias"=>$categorias,"relleno"=>$datos,"errores"=>$errores]);
+                }
+            }else{
+                $this->pages->render("pages/admin/gestionProductos",["productos"=>$productos,"categorias"=>$categorias,"relleno"=>$datos,"errores"=>$errores]);
+            }
             
-            if(is_uploaded_file($_FILES['imagen']["tmp_name"])){
-                $nombreDirectorio = "subidas/";
-                $nombreFichero = $_FILES['imagen']['name'];
-                $nombreCompleto = $nombreDirectorio.$nombreFichero;
-                if (!is_dir($nombreDirectorio)) {
-                    mkdir($nombreDirectorio, 0755, true);
-                    chown($nombreDirectorio, 'www-data');
-                }
-                if(is_file($nombreCompleto)){
-                    $idUnico=time();
-                    $nombreFichero = $idUnico."-".$nombreFichero;   
-                }
-                $_POST['data']['imagen']=$nombreFichero;
-                if(!move_uploaded_file($_FILES['imagen']['tmp_name'], $nombreDirectorio.$nombreFichero)){
-                    $errores['file'] = "Error en la subida";
-                }
-            }
-            else{
-                $errores['file'] = "Error en la carga";
-            }
-            $this->productosService->addProduct($_POST['data']);
-            $this->gestionProductos();
+            
         }
         /**
          * Función para gestionar las opciones de los productos
@@ -216,11 +231,16 @@
         /**
          * Función para modificar el rol de los usuarios
          */
-        public function modRol() {
+        public function modRol() :void {
             Utils::checkSesionAdmin();
             $id = $_POST['editar'];
             $rol = $_POST['edit'];
             $this->usuariosService->modRol($id,$rol);
             header("Location:".BASE_URL."gestionUsuarios");
+        }
+        public function addUserAdmin() :void {
+            Utils::checkSesionAdmin();
+            $usuarios = $this->usuariosService->allUsers();
+            $this->pages->render("pages/admin/gestionUsuarios",["usuarios"=>$usuarios,"addUser"=>true]);
         }
     }
