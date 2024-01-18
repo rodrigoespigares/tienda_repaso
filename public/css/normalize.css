@@ -6,10 +6,10 @@
 }
 :root{
     font-size: 62.5%;
-    --primary: rgb(120, 32, 178);
-    --primaryCeroOcho: rgba(120, 32, 178,0.8);
-    --secondary: rgb(46, 255, 168);
-    --secondary--ceroSeis: rgba(46, 255, 168,0.6);
+    --primary: rgb(32,178,170);
+    --primaryCeroOcho: rgba(32,178,170,0.8);
+    --secondary: rgb(255, 184, 46);
+    --secondary--ceroSeis: rgba(255, 184, 46,0.6);
 }
 body{
     display: flex;
