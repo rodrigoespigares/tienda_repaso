@@ -44,8 +44,8 @@
          * @param array $datos datos del pedido
          *
          */
-        public function nuevoPedido(array $datos):void{
-            $this->repository->nuevoPedido($datos);
+        public function nuevoPedido(array $datos):?string{
+            return $this->repository->nuevoPedido($datos);
         }
          /**
          * Función para desactivar un producto

@@ -130,9 +130,8 @@
                     $this->sql->bindValue(":unidades",$value['unidades']);
                     $this->sql->execute();   
                 }
-                $result = null;
                 $this->conection->commit();
-                $this->service->nuevoPedido($datos);
+                $result =$this->service->nuevoPedido($datos);
                 
             }catch(PDOException $e){
                 $this->sql->rollBack();
