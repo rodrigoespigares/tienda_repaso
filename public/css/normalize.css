@@ -1,13 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Montserrat:wght@200;400;600&display=swap');
 *{
     padding: 0;
     margin: 0;
     font-family: 'Manrope', sans-serif;
 }
 :root{
-    --primary: rgb(32,178,170);
-    --secondary: #ffb82e;
-    --secondary--ceroSeis: rgba(255, 184, 46,0.6);
+    font-size: 62.5%;
+    --primary: rgb(120, 32, 178);
+    --primaryCeroOcho: rgba(120, 32, 178,0.8);
+    --secondary: rgb(46, 255, 168);
+    --secondary--ceroSeis: rgba(46, 255, 168,0.6);
 }
 body{
     display: flex;
@@ -17,6 +19,56 @@ body{
 }
 main{
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#main__index{
+
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: minmax(100vw,min-content);
+    grid-template-rows: [hero-start]90vh[hero-end];
+    row-gap: 3rem;
+
+}
+h1{
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 5rem;
+}
+h2{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 3rem;
+    color: var(--primary);
+}
+p{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    font-size: 1.5rem;
+}
+a{
+    text-decoration: none;
+    font-size: 1.6rem;
+}
+.table {
+    width: 70%;
+    margin-bottom: 2rem;
+}
+.table , .table td, .table th{
+    border-collapse: collapse;
+    border-bottom: 1px solid black;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+.divider{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 2rem;
+}
+.divider form{
     display: flex;
     flex-direction: column;
     align-items: center;

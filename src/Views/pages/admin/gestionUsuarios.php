@@ -1,4 +1,5 @@
-<table>
+<section class="divider">
+<table class="table">
     <tr>
         <th>Nombre</th>
         <th>Apellidos</th>
@@ -19,19 +20,15 @@
                         </select>
                     </td>
                     <td>
-                        <button name="editar" value="<?= $usuario->getId()?>">editar</button>
+                        <button name="editar" value="<?= $usuario->getId()?>">Cambiar Rol</button>
                     </td>
                 </form>
         </tr>
     <?php endforeach;?>
-    <form action="<?=BASE_URL?>addUserAdmin" method="post">
-        <button type="submit">Añadir usuario</button>
-    </form>
 </table>
-
-<?php if(isset($addUser) ) :?>
-    <h2>Register</h2>
+    
     <form action="<?= BASE_URL ?>vloginAdmin" method="post" class="formLogin">
+        <h2>Register</h2>   
         <input type="text" name="isLogin" value="false" hidden>
         <div>
             <label for="email">Email</label>
@@ -67,4 +64,4 @@
         </div>
         <button type="submit">Registrar</button>
     </form>
-<?php endif;?>
+</section>

@@ -22,6 +22,6 @@ class BaseController {
      */
     public function ver() : void {
         $productos = $this->productosService->findCategory($_GET["id"]);
-        $this->pages->render("pages/base/principal",["productos"=>$productos]);
+        $this->pages->render("pages/base/catalogo",["productos"=>$productos]);
     }
 }

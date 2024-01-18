@@ -1,4 +1,4 @@
-<table>
+<table class="table">
     <tr>
         <th>id</th>
         <th>nombre</th>

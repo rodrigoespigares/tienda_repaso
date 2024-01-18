@@ -1,5 +1,6 @@
 .carrito{
     width: 80%;
+    font-size: 1.6rem;
 }
 .carrito__producto{
     display: flex;
