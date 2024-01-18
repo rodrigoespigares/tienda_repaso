@@ -66,3 +66,6 @@ CONSTRAINT pk_lineas_pedidos PRIMARY KEY(id),
 CONSTRAINT fk_linea_pedido FOREIGN KEY(pedido_id) REFERENCES pedidos(id),
 CONSTRAINT fk_linea_producto FOREIGN KEY(producto_id) REFERENCES productos(id)
 )ENGINE=InnoDb DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+
+INSERT INTO `usuarios` ( `nombre`, `apellidos`, `email`, `password`, `rol`) VALUES ('admin', 'admin', 'administrador@administrador.es', '$2y$04$jPzZ2mniWr3c2eIdW7r.lew2FPK42Pg54Fl9/KFoiTTjLR6tHJ2l2', 'admin');
