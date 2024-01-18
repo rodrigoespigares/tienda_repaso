@@ -30,7 +30,9 @@
 <?php elseif(!isset($_SESSION['identity'])):?>
     <section>
         <h2>Inicia sesion antes de realizar el pedido:</h2>
-        <a href="<?=BASE_URL?>login">Iniciar sesión</a>
+        <form action="<?=BASE_URL?>login" method="post">
+            <button name="login" value="true">Inicia sesión</button>
+        </form>
     </section>
 <?php else:?>
     <section>

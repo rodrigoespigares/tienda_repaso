@@ -1,4 +1,7 @@
+.formLogin{
+    font-size: 2rem;
+}
 .err{
     color: red;
-    font-size: .6rem;
+    font-size: 1.6rem;
 }

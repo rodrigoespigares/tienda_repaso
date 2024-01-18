@@ -3,6 +3,7 @@
     padding: 0;
     margin: 0;
     font-family: 'Manrope', sans-serif;
+    box-sizing: border-box;
 }
 :root{
     font-size: 62.5%;
@@ -27,7 +28,7 @@ main{
 
     flex-grow: 1;
     display: grid;
-    grid-template-columns: minmax(100vw,min-content);
+    grid-template-columns: minmax(99vw,min-content);
     grid-template-rows: [hero-start]90vh[hero-end];
     row-gap: 3rem;
 
