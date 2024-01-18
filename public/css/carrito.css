@@ -12,6 +12,7 @@
 .carrito__producto__info{
     display: flex;
     align-items: center;
+    gap: 3rem;
 }
 .carrito__producto__content{
     width: 5%;

@@ -2,6 +2,7 @@
     justify-content: space-around;
     display: flex;
     flex-wrap: wrap;
+    gap: 3rem;
 }
 .catalogo__producto{
     display: flex;
@@ -48,6 +49,10 @@
 .catalogo__producto .button__purple:hover{
     background-color: var(--secondary);
     color: white;
+}
+.carrito__producto__delete{
+    display: flex;
+    align-items: center;
 }
 
 /* MEDIA QUERY PARA VISTAS MENORES QUE 992px */

@@ -6,7 +6,8 @@
                 <div class="carrito__producto__content">
                     <img src="<?=BASE_URL."/subidas/".$productoCarrito['productos'][0]->getImagen()?>" alt="Producto" class="carrito__producto__content__img">
                 </div>
-                <p><?= $productoCarrito['productos'][0]->getNombre()?></p>
+                <p><b>Nombre:</b> <?= $productoCarrito['productos'][0]->getNombre()?></p>
+                <p><b>Precio:</b> <?= $productoCarrito['productos'][0]->getPrecio()?>€</p>
             </div>
             <div class="carrito__producto__cantidad">
                 <a href="<?=BASE_URL?>down?id=<?=$productoCarrito['id']?>">-</a>
