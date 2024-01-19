@@ -1,0 +1,26 @@
+.table {
+    width: 70%;
+    margin-bottom: 2rem;
+    
+}
+.table , .table td, .table th{
+    border-collapse: collapse;
+    border-bottom: 1px solid black;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+}
+.divider{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 2rem;
+}
+.divider form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.6rem;
+}
