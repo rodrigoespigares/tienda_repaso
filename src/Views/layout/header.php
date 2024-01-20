@@ -20,6 +20,7 @@ $categoriasAdmin = array(
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zarando</title>
+    <link rel="shortcut icon" href="<?=BASE_URL?>public/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/css/style.css">
     <!--*-*-*-*-*-*-*-*-*-*-*-*-*-* CDN *-*-*-*-*-*-*-*-*-*-*-*-*-*-->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <!-- VUE JS -->

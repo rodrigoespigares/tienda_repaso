@@ -20,15 +20,10 @@
         public function findAll(string $id) :?array
         {
             try {
-                $this->sql = $this->conection->prepareSQL("SELECT productos.* FROM productos JOIN lineas_pedidos ON productos.id = lineas_pedidos.producto_id WHERE lineas_pedidos.pedido_id = :pedido_id;");
+                $this->sql = $this->conection->prepareSQL("SELECT productos.*, lineas_pedidos.pedido_id,lineas_pedidos.unidades FROM productos JOIN lineas_pedidos ON productos.id = lineas_pedidos.producto_id WHERE lineas_pedidos.pedido_id = :pedido_id;");
                 $this->sql->bindValue(":pedido_id", $id);
                 $this->sql->execute();
-                $resultados = $this->sql->fetchAll(PDO::FETCH_ASSOC);
-                foreach ($resultados as $key => $resultadoData){
-                    
-                    
-                    $result[$key]= [ 'producto'=> Productos::fromArray($resultadoData), "id_pedido"=> $id];
-                }
+                $result = $this->sql->fetchAll(PDO::FETCH_ASSOC);
                 $this->sql->closeCursor();
             } catch (PDOException $e) {
                 $result = $e->getMessage();

@@ -24,19 +24,24 @@ class Router {
        //$_SERVER['REQUEST_URI'] almacena la cadena de texto que hay después del nombre del host en la URL
         $action = trim($action, '/');
 
-        $param = null;
-        preg_match('/[0-9]+$/', $action, $match);
-       
+        $param1 = null;
+        $param2 = null;
+        preg_match('/(\d+)(?:&page=(\d+))?$/', $action, $match);
         if(!empty($match)){
             
-            $param = $match[0];
-            $action=preg_replace('/'.$match[0].'/',':id',$action);//quitamos la primera parte que se repite siempre (clinicarouter)
+            $param1 = $match[1];
+            
+            $param2 = isset($match[2])?$match[2]:null;
+            $action=preg_replace('/'.$match[1].'/',':id',$action);//quitamos la primera parte que se repite siempre (clinicarouter)
+            if(isset($match[2])){
+                $action=preg_replace('/'.$match[2].'/',':page',$action);
+            }
         }
-        
         /*-*-*-*-*-*-*-*-*-* VIEJO *-*-*-*-*-*-*-*-*-*/
         $callback = self::$routes[$method][$action];
-       
-        echo call_user_func($callback, $param); 
+        
+        echo call_user_func($callback, $param1, $param2);
+        
         
         /*-*-*-*-*-*-*-* MUESTRA ERROR *-*-*-*-*-*-*-*
 

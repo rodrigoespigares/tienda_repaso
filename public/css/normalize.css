@@ -7,9 +7,9 @@
 }
 :root{
     font-size: 62.5%;
-    --primary: rgb(32,178,170);
+    --primary: #20b2aa;
     --primaryCeroOcho: rgba(32,178,170,0.8);
-    --secondary: rgb(255, 184, 46);
+    --secondary: #ffb82e;
     --secondary--ceroSeis: rgba(255, 184, 46,0.6);
 }
 body{

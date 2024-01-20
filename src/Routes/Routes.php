@@ -48,6 +48,9 @@
             Router::add('GET', '/c?id=:id', function ($id) {
                 return (new BaseController())->ver($id);
             });
+            Router::add('GET', '/c?id=:id&page=:page', function ($id, $page) {
+                return (new BaseController())->ver($id,$page);
+            });
             // AÑADIR CATEGORIAS Y PRODUCTOS
             Router::add('POST','/addC', function (){
                 return (new AdminController())->addCategory();
