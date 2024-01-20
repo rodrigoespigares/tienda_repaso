@@ -10,10 +10,20 @@
         function __construct(){
             $this->conection = new DataBase();
         }
+        /**
+         * Función para buscar todos los productos
+         * 
+         * @return array con los resultados
+         */
         public function findAll():? array {
             $this->conection->querySQL("SELECT * FROM usuarios;");
             return $this->extractAll();
         }
+        /**
+         * Función para buscar todos los productos
+         * 
+         * @return array con los resultados
+         */
         public function extractAll():?array {
             $usuarios = [];
             try{
@@ -27,17 +37,27 @@
             }
             return $usuarios;
         }
-        public function registro($nombre,$apellidos,$email,$password){
+        /**
+         * Función para registrar un usuario
+         * 
+         * @param string $nombre con el nombre de usuario
+         * @param string $apellidos con el apellido del usuario
+         * @param string $email con el email del usuario
+         * @param string $password con la contraseña del usuario
+         * @param string $rol por defecto sera user pero sera el rol del usuario
+         * 
+         * @return string si hay error
+         */
+        public function registro($nombre,$apellidos,$email,$password,$rol="user") :?string{
             try{
-                $this->sql = $this->conection->prepareSQL("INSERT INTO usuarios(nombre,apellidos,email,password,rol) VALUES (:nombre,:apellidos,:email,:password,:rol);");
-                $rol = "user";
+                $this->sql = $this->conection->prepareSQL("INSERT INTO usuarios(nombre,apellidos,email,password,rol) VALUES (:nombre,:apellidos,:email,:password,:rol);");      
                 $this->sql->bindValue(":nombre",$nombre);
                 $this->sql->bindValue(":apellidos",$apellidos);
                 $this->sql->bindValue(":email",$email);
                 $this->sql->bindValue(":password",$password);
                 $this->sql->bindValue(":rol",$rol);
                 $this->sql->execute();
-                $result = $this->sql->rowCount();
+                $result = null;
             }catch(PDOException $e){
                 $result = $e->getMessage();
             }
@@ -45,7 +65,14 @@
             $this->sql = null;
             return $result;
         }
-        public function getIdentity($email) {
+        /**
+         * Función para obtener todos los datos del usuario por el email
+         * 
+         * @param string $email con el email del usuario
+         * 
+         * @return array con los datos del usuario
+         */
+        public function getIdentity(string $email) :?array {
             $usuario = null;
             try {
                 $this->sql = $this->conection->prepareSQL("SELECT * FROM usuarios WHERE email = :email");
@@ -61,15 +88,24 @@
         
             return $usuario;
         }
-        public function modRol($id,$rol){
+        /**
+         * Función para modificar el rol de un usuario
+         * 
+         * @param string $id con el id del usuario
+         * @param string $rol con el rol modificado
+         * 
+         * @return string si hay error
+         */
+        public function modRol($id,$rol) :?string{
             try {
                 $this->sql = $this->conection->prepareSQL("UPDATE usuarios SET rol = :rol WHERE id = :id;");
                 $this->sql->bindValue(":id", $id);
                 $this->sql->bindValue(":rol", $rol);
                 $this->sql->execute();
                 $this->sql->closeCursor();
-            } catch (PDOException $e) {
                 $result = null;
+            } catch (PDOException $e) {
+                $result = $e->getMessage();
             }
             $this->sql = null;
             return $result;

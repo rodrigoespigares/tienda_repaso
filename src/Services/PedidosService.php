@@ -7,16 +7,36 @@
         function __construct() {
             $this->repository = new PedidosRepository();
         }
-        public function find($id) :?array {
+        /**
+         * Función para buscar un pedido
+         * @param string $id con el id del pedido a buscar
+         * @return array con el pedidos
+         */
+        public function find(string $id) :?array {
             return $this->repository->find($id);
         }
+        /**
+         * Función para buscar todos los pedidos
+         * 
+         * @return array con todos los pedidos
+         */
         public function findAll() :?array {
             return $this->repository->findAll();
         }
-        public function nuevoPedido($datos){
+        /**
+         * Función para añadir un pedido
+         * @param array $datos con los datos del pedido
+         * 
+         */
+        public function nuevoPedido(array $datos):?string{
             return $this->repository->nuevoPedido($datos);
         }
-        public function changeEstado($id,$estado){
-            return $this->repository->changeEstado($id,$estado);
+        /**
+         * Función para cambiar el estado de un pedido
+         * @param string $id con el id del pedido
+         * @param string $estado con el nuevo estado del pedido
+         */
+        public function changeEstado(string $id,string $estado) :void {
+            $this->repository->changeEstado($id,$estado);
         }
     }

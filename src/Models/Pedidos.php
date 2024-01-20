@@ -95,7 +95,9 @@ class Pedidos{
     public function setHora(string $hora): void {
         $this->hora = $hora;
     }
-
+    /**
+     * Crea un pedido a partir de un array
+     */
     public static function fromArray(array $data): Pedidos
     {
         return new Pedidos(
@@ -109,5 +111,17 @@ class Pedidos{
             $data['fecha'] ?? "",
             $data['hora'] ?? "",
         );
+    }
+    /**
+     * Validacion modificación de pedidos
+     */
+    public static function validationEdit(string $data, array &$errores): array
+    {
+        $array =["pendiente","enviado"];
+        if (!empty($name) && !Validar::validar_array($data,$array)) {
+            $errores['estado'] = "Estado no posible";
+        }
+    
+        return $errores;
     }
 }

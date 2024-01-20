@@ -1,4 +1,4 @@
-<table>
+<table class="table">
     <tr>
         <th>id</th>
         <th>nombre</th>
@@ -27,6 +27,9 @@
         <input type="text" name="nombre" id="name">
         <button type="submit">Guardar</button>
     </form>
+    <?php if(isset($errores['name'])) :?>
+        <p class="err"><?=$errores['name']?></p>
+    <?php endif;?>
 <?php else:?>
     <form action="<?=BASE_URL?>editC" method="post">
         <label for="name">Editar categoria:</label>
@@ -35,4 +38,7 @@
         <button type="submit">Editar</button>
         <a href="<?=BASE_URL?>gestionCategorias">Cancelar</a>
     </form>
+    <?php if(isset($errores['name'])) :?>
+        <p class="err"><?=$errores['name']?></p>
+    <?php endif;?>
 <?php endif;?>

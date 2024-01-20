@@ -1,5 +1,6 @@
 .carrito{
     width: 80%;
+    font-size: 1.6rem;
 }
 .carrito__producto{
     display: flex;
@@ -11,6 +12,7 @@
 .carrito__producto__info{
     display: flex;
     align-items: center;
+    gap: 3rem;
 }
 .carrito__producto__content{
     width: 5%;
@@ -47,13 +49,13 @@
     width: 100%;
 }
 .detalle__producto h2{
-    font-size: 1rem;
+    font-size: 3rem;
     color: var(--primary);
 }
 .detalle__producto a, .detalle__producto__dos a{
     color: var(--secondary);
     text-decoration: none;
-    font-size: 2rem;
+    font-size: 4rem;
 }
 .detalle__producto__dos{
     display: flex;

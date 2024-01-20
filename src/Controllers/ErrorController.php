@@ -16,8 +16,4 @@ class ErrorController
     {
         return "<p>La pagina no existe</p>";
     }
-    public static function show_err504(): string
-    {
-        return "<p>La pagina no existe (ANTES)</p>";
-    }
 }

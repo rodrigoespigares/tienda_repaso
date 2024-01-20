@@ -68,10 +68,10 @@
          * Función validar_array
          * Comprueba que el string pasado como parámetro este contenido en el array de los posibles valores correctos.
          * @param string $tipo parámetro a comprobar de tipo string
+         * @param array $array array con las posibles opciones
          * @return bool return de tipo bool devuelve true si el parámetro esta contenido en el array.
          */
-        public static function validar_array(string $tipo):bool{
-                $array = ["facil","medio","dificil"];
+        public static function validar_array(string $tipo, array $array):bool{
                 return in_array($tipo,$array);
         }
     }

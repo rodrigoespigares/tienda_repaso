@@ -29,9 +29,4 @@ class Pages
         // Carga del footer
         require_once $arriba."/Views/layout/footer.php";
     }
-    public function converter(array $params):void
-    {
-        $jsonString = json_encode($params);
-        echo $jsonString;
-    }
 }

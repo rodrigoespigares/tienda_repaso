@@ -13,6 +13,9 @@
             Router::add('GET','/', function (){
                 return (new BaseController())->showPage();
             });
+            Router::add('GET','/?page=:id', function ($id){
+                return (new BaseController())->showPage($id);
+            });
             // LOGIN
             Router::add('POST','/login', function (){
                 return (new LoginController())->login();
@@ -44,6 +47,9 @@
             // CATEGORIAS MENU
             Router::add('GET', '/c?id=:id', function ($id) {
                 return (new BaseController())->ver($id);
+            });
+            Router::add('GET', '/c?id=:id&page=:page', function ($id, $page) {
+                return (new BaseController())->ver($id,$page);
             });
             // AÑADIR CATEGORIAS Y PRODUCTOS
             Router::add('POST','/addC', function (){
@@ -81,6 +87,9 @@
             Router::add('GET', '/down?id=:id', function ($id) {
                 return (new CarritoController())->down($id);
             });
+            Router::add('GET', '/borrar/:id', function ($id) {
+                return (new CarritoController())->borrar($id);
+            });
 
             //PEDIDO
             Router::add('POST','/pedido', function (){
@@ -107,7 +116,12 @@
             Router::add('POST', '/editUser', function () {
                 return (new AdminController())->modRol();
             });
-
+            Router::add('POST', '/addUserAdmin', function () {
+                return (new AdminController())->addUserAdmin();
+            });
+            Router::add('POST', '/vloginAdmin', function () {
+                return (new LoginController())->vLoginAdmin();
+            });
             // ERROR 404
             Router::add('GET', '/error', function () {
                 return (new ErrorController())->show_err404();

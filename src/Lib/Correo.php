@@ -8,7 +8,10 @@
         {
             $this->mail=new PHPMailer();
         } 
-        public function sendMail($email, $usuario) {
+        /**
+         * Función base para mandar un email.
+         */
+        public function sendMail($email, $usuario, $carrito, $nPedido) {
             $this->mail->isSMTP();
             $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;
             $this->mail->Host = 'smtp.gmail.com';
@@ -18,40 +21,40 @@
             $this->mail->Username = 'respigares.spam@gmail.com';
             $this->mail->Password = 'gmwiqixepllkwunf';
 
-            //Set who the message is to be sent from
-            //Note that with gmail you can only use your account address (same as `Username`)
-            //or predefined aliases that you have configured within your account.
-            //Do not use user-submitted addresses in here
+            // Establece quién enviará el mensaje.
+            // Ten en cuenta que con Gmail solo puedes usar la dirección de tu cuenta (igual que Username)
+            // o alias predefinidos que hayas configurado en tu cuenta.
+            // No uses direcciones proporcionadas por el usuario aquí.
             $this->mail->setFrom('respigares.spam@gmail.com', 'ADMINISTRADOR');
 
-            //Set an alternative reply-to address
-            //This is a good place to put user-submitted addresses
+
+            // Establece una dirección alternativa para las respuestas
+            // Este es un buen lugar para poner direcciones proporcionadas por el usuario.
             $this->mail->addReplyTo('respigares.spam@gmail.com', 'ADMINISTRADOR');
 
-            //Set who the message is to be sent to
+            
+            // Establece a quién se enviará el mensaje
             $this->mail->addAddress("$email", "$usuario");
             $this->mail->isHTML(true);
-            //Set the subject line
-            $this->mail->Subject = 'PHPMailer GMail SMTP test';
+            //Establece la línea de asunto.
+            $this->mail->Subject = 'Su pedido de zarando ha sido procesado';
 
-            //Read an HTML message body from an external file, convert referenced images to embedded,
-            //convert HTML into a basic plain-text alternative body
-            // $this->mail->msgHTML(file_get_contents('contents.html'), __DIR__);
+            // Reemplaza el cuerpo de texto plano con uno creado manualmente.
+            $this->mail->Body = $this->crearHtml($usuario, $carrito, $nPedido);
 
-            //Replace the plain text body with one created manually
-            $this->mail->Body = $this->crearHtml($usuario);
-
-            //Attach an image file
-            $this->mail->addAttachment('images/phpmailer_mini.png');
-
-            //send the message, check for errors
+            //Envia el mensaje, checkea los errores
             if (!$this->mail->send()) {
                 echo 'Mailer Error: ' . $this->mail->ErrorInfo;
             } else {
                 echo 'Message sent!';
             }
         }
-        public function crearHtml($user):string {
+        /**
+         * Función para crear el HTML con el parametro usuario
+         */
+        public function crearHtml($user,$carrito,$nPedido):string {
+
+            $precioTotal = 0;
             $html="<!DOCTYPE html>
             <html lang='es'>
             <head>
@@ -61,8 +64,19 @@
             </head>
             <body>";
             $html.= "<h2>Hola $user</h2>";
-            $html.= "<p> Su pedido ha sido tramitado y llegará en unos 4-6 días habiles.</p>";
-
+            $html.= "<p> Su pedido $nPedido ha sido tramitado y llegará en unos 4-6 días habiles.</p>";
+            $html.="<h2>Detalles de su pedido:</h2>";
+            $html.="<table> <tr> <th>Nombre</th> <th>Cantidad</th> <th>Precio</th></tr>";
+            foreach ($carrito as $value) {
+                $html.="<tr>";
+                $html.="<td>".unserialize($value['producto'])[0]->getNombre()."</td>";
+                $html.="<td>".$value['unidades']."</td>";
+                $html.="<td>".unserialize($value['producto'])[0]->getPrecio()."</td>";
+                $html.="</tr>";
+                $precioTotal += $value['unidades'] * unserialize($value['producto'])[0]->getPrecio();
+            }
+            $html.="</table>";
+            $html.="Precio total: $precioTotal";
             $html.="</body></html>";
             return $html;
         }

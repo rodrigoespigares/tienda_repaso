@@ -36,7 +36,9 @@ class Categorias{
     public function setBorrado(?string $borrado): void {
         $this->borrado = $borrado;
     }
-
+    /**
+     * Crea una categoria a partir de un array
+     */
     public static function fromArray(array $data): Categorias
     {
         return new Categorias(
@@ -44,5 +46,17 @@ class Categorias{
             $data['nombre'] ?? "",
             $data['borrado'] ?? "",
         );
+    }
+    /**
+     * Función para validar una categoria
+     */
+    public static function validation(array $data, array &$errores): array
+    {
+        $name = $data['name'];
+        if (!empty($name) && !Validar::son_letras($name)) {
+            $errores['name'] = "Nombre tiene caracteres extraños";
+        }
+    
+        return $errores;
     }
 }

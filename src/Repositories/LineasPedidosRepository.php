@@ -11,18 +11,19 @@
         function __construct(){
             $this->conection = new DataBase();
         }
-        public function findAll($id) :?array
+        /**
+         * Función para buscar todas las lineas de un pedido
+         * 
+         * @param string id con el id del pedido
+         * @return array con la lineas del pedido
+         */
+        public function findAll(string $id) :?array
         {
             try {
-                $this->sql = $this->conection->prepareSQL("SELECT productos.* FROM productos JOIN lineas_pedidos ON productos.id = lineas_pedidos.producto_id WHERE lineas_pedidos.pedido_id = :pedido_id;");
+                $this->sql = $this->conection->prepareSQL("SELECT productos.*, lineas_pedidos.pedido_id,lineas_pedidos.unidades FROM productos JOIN lineas_pedidos ON productos.id = lineas_pedidos.producto_id WHERE lineas_pedidos.pedido_id = :pedido_id;");
                 $this->sql->bindValue(":pedido_id", $id);
                 $this->sql->execute();
-                $resultados = $this->sql->fetchAll(PDO::FETCH_ASSOC);
-                foreach ($resultados as $key => $resultadoData){
-                    
-                    
-                    $result[$key]= [ 'producto'=> Productos::fromArray($resultadoData), "id_pedido"=> $id];
-                }
+                $result = $this->sql->fetchAll(PDO::FETCH_ASSOC);
                 $this->sql->closeCursor();
             } catch (PDOException $e) {
                 $result = $e->getMessage();
@@ -30,7 +31,13 @@
             $this->sql = null;
             return $result;
         }
-        public function nuevoPedido($id)  {
+        /**
+         * Función para crear un nuevo pedido con una transacion
+         * 
+         * @param string id con el id del pedido
+         * @return string si hay error
+         */
+        public function nuevoPedido(string $id) :?string {
             try{
                 $this->conection->beginTransaction();
                 foreach ($_SESSION['carrito'] as $value) {
