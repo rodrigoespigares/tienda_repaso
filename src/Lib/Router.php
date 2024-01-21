@@ -37,19 +37,19 @@ class Router {
                 $action=preg_replace('/'.$match[2].'/',':page',$action);
             }
         }
-        /*-*-*-*-*-*-*-*-*-* VIEJO *-*-*-*-*-*-*-*-*-*/
+        /*-*-*-*-*-*-*-*-*-* VIEJO *-*-*-*-*-*-*-*-*-
         $callback = self::$routes[$method][$action];
         
         echo call_user_func($callback, $param1, $param2);
         
         
-        /*-*-*-*-*-*-*-* MUESTRA ERROR *-*-*-*-*-*-*-*
+        /*-*-*-*-*-*-*-* MUESTRA ERROR *-*-*-*-*-*-*-*/
 
         if (isset(self::$routes[$method][$action])) {
             $callback = self::$routes[$method][$action];
-            echo call_user_func($callback, $param);
+            echo call_user_func($callback, $param1, $param2);
         } else {
             header("Location:".BASE_URL."error");
-        } */
+        } 
     }
 }
